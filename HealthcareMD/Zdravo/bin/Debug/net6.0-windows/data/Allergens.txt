@@ -1,0 +1,3 @@
+1|Gluten|Zitarice koje sadrze gluten su psenica,raz,spelta,jecam,kamut
+2|Laktoza|Laktoza je secer koji se javlja u mleku i u svim mlecnim proizvodima
+3|Penicilin|Predstavlja abnormalnu reakciju imunskog sistema na istoimeni lek iz grupe antibiotika

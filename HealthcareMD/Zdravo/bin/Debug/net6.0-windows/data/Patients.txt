@@ -1,0 +1,4 @@
+Darko,Filipovic,874523,darkofilipovic,sifra123,11,5/5/2005 12:00:00 AM,F,Novosadska 3,false,darko@gmail.com,1
+Jelena,Capik,325352,jelenacapikaada,sifra3123212,041421,2/2/2000 12:00:00 AM,F,Futoska 6,false,@gmail.com
+Milica,Simic,24342,msimic,123,3233,2/1/2000 12:00:00 AM,F,Njegoseva 13,false,msimic@gmail.com
+Nikola,Maric,43243,nmaric,aaa,2345,5/15/2000 12:00:00 AM,M,Golubinacka 20,false,nklmrn@gmail.com,1.2.3
