@@ -16,6 +16,7 @@ using OxyPlot;
 using OxyPlot.Legends;
 using OxyPlot.Series;
 using OxyPlot.Axes;
+using System.Windows.Media;
 
 namespace HealthcareMD.ViewModel
 {
@@ -32,6 +33,7 @@ namespace HealthcareMD.ViewModel
         private ObservableCollection<VacationString> upcomingVacations;
         private ObservableCollection<Drug> drugs;
         private ObservableCollection<Patient> patients;
+        
         private int doctorId;
         private string date;
         public string Date { get { return date; } set { date = value; } }

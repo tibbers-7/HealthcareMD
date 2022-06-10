@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using HealthcareMD.ViewModel;
 using System.Windows.Threading;
 using Model;
+using System.Windows.Media;
 
 namespace HealthcareMD
 {
@@ -97,8 +98,9 @@ namespace HealthcareMD
         private void Vacations_DoubleClick(object sender, RoutedEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
-            Vacation vacation = (Vacation)item.Content;
+            VacationString vacation = (VacationString)item.Content;
             viewModel.VacationShow(vacation.Id);
+            
         }
 
 

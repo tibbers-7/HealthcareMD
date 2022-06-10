@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using HealthcareMD.Service;
 using HealthcareMD.Model;
+using Tools;
 
 namespace HealthcareMD.Controller
 {
@@ -56,7 +57,7 @@ namespace HealthcareMD.Controller
 
         public int CreateAppointment(int patientId, int doctor, int roomId, int hours, int minutes, int duration, string date, bool emergency)
         {
-            Appointment appt = new Appointment() { Date = Tools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctor, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, Status = Status.accepted, DoctorSchedules = doctor, Type = 'A' };
+            Appointment appt = new Appointment() { Date = TimeTools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctor, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, Status = Status.accepted, DoctorSchedules = doctor, Type = 'A' };
             return service.CreateAppointment(appt,patientId,null);
         }
 
@@ -112,20 +113,20 @@ namespace HealthcareMD.Controller
         
         public int UpdateAppointment(int id, int patientId,int doctorId, int roomId, int hours, int minutes, int duration,string date, bool emergency)
         {
-            Appointment appt = new Appointment() { Id = id, Date = Tools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctorId, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, DoctorSchedules=doctorId, Type='A', Status = Status.accepted };
+            Appointment appt = new Appointment() { Id = id, Date = TimeTools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctorId, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, DoctorSchedules=doctorId, Type='A', Status = Status.accepted };
             return service.Update(appt);
         }
 
         internal int CreateReport(int apptId,string date, string diagnosis, string _report,string anamnesis)
         {
             Appointment appt=GetById(apptId);
-            Report report = new Report() { Date = Tools.ParseDate(date), PatientId = appt.Patient, ReportString = _report, Diagnosis = diagnosis, Anamnesis=anamnesis };
+            Report report = new Report() { Date = TimeTools.ParseDate(date), PatientId = appt.Patient, ReportString = _report, Diagnosis = diagnosis, Anamnesis=anamnesis };
             return reportPrescriptionService.CreateReport(appt,report);
         }
 
         internal int UpdateReport(int patientId,int reportId, string date, string diagnosis, string reportString,string anamnesis)
         {
-            return reportPrescriptionService.UpdateReport(patientId,reportId, Tools.ParseDate(date), diagnosis, reportString,anamnesis);
+            return reportPrescriptionService.UpdateReport(patientId,reportId, TimeTools.ParseDate(date), diagnosis, reportString,anamnesis);
         }
         public List<Appointment> GetAll()
         {

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection.Metadata;
+using Tools;
 
 namespace Service
 {
@@ -27,16 +28,19 @@ namespace Service
         private List<string> prescLines;
         private List<string> reportLines;
         private string info;
+
         public PatientService(DrugRepository drugRepository,PatientRepository patientRepository,DoctorRepository doctorRepository)
         {
             this.drugRepository = drugRepository;
             this.doctorRepository = doctorRepository;
             this.patientRepository = patientRepository;
+
+            
         }
         public string checkId()
         {
             
-            ObservableCollection<Patient> patients = patientRepository.GetAll();
+            List<Patient> patients = patientRepository.GetAll();
             int sifra = 0;
             for(int i = 0; i < patients.Count; i++)
             {
@@ -48,7 +52,7 @@ namespace Service
         internal ObservableCollection<Prescription> GetPrescriptions(int patientId)
         {
             Patient patient = GetById(patientId);
-            return new ObservableCollection<Prescription>(patient.Prescriptions);
+            return new ObservableCollection<Prescription>(GetById(patientId).Prescriptions);
         }
 
         internal void GetPatientReport(Patient patient, DateOnly startDate, DateOnly endDate)
@@ -71,7 +75,7 @@ namespace Service
             int reportCount=1;
             foreach (Report report in patient.Reports)
             {
-                if (Tools.IsDateBetween(report.Date, startDate, endDate))
+                if (TimeTools.IsDateBetween(report.Date, startDate, endDate))
                 {
                     reportLines.AddRange(report.GetReportInfo(reportCount++));
                     reportLines.Add("\n");
@@ -81,7 +85,7 @@ namespace Service
             int prescCount = 1;
             foreach (Prescription prescription in patient.Prescriptions)
             {
-                if (Tools.IsDateBetween(prescription.Date, startDate, endDate))
+                if (TimeTools.IsDateBetween(prescription.Date, startDate, endDate))
                 {
                     string drugName = drugRepository.GetById(prescription.DrugId).Name;
                     prescLines.AddRange(prescription.GetPrescriptionInfo(drugName,prescCount++));
@@ -91,7 +95,7 @@ namespace Service
 
         }
 
-        internal ObservableCollection<Patient> GetAll()
+        internal List<Patient> GetAll()
         {
             return patientRepository.GetAll();
         }
@@ -103,8 +107,7 @@ namespace Service
 
         internal ObservableCollection<Report> GetReports(int patientId)
         {
-            Patient patient = patientRepository.GetById(patientId);
-            return new ObservableCollection<Report>(patient.Reports);
+            return new ObservableCollection<Report>(GetById(patientId).Reports);
         }
 
         internal Doctor GetChosenDoctor(string doctorSpecialty,int patientId)

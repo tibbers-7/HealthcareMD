@@ -3,6 +3,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Tools;
 
 namespace HealthcareMD.Controller
 {
@@ -17,8 +18,8 @@ namespace HealthcareMD.Controller
 
         internal int ScheduleVacation(int doctorId,string startDate, string endDate, string reason,bool emergency)
         {
-            DateOnly _startDate = Tools.ParseDate(startDate);
-            DateOnly _endDate = Tools.ParseDate(endDate);
+            DateOnly _startDate = TimeTools.ParseDate(startDate);
+            DateOnly _endDate = TimeTools.ParseDate(endDate);
             return service.ScheduleVacation(doctorId,_startDate, _endDate, reason,emergency);
         }
 

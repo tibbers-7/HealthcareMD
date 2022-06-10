@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace HealthcareMD
+namespace Tools
 {
-    internal class Tools
+    internal class TimeTools
 
         
     {

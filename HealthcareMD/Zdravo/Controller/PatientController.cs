@@ -11,6 +11,7 @@ using Repository;
 using System.Windows.Controls;
 using HealthcareMD;
 using System.Collections.ObjectModel;
+using Tools;
 
 namespace HealthcareMD.Controller
 {
@@ -55,12 +56,12 @@ namespace HealthcareMD.Controller
 
         internal void GetPatientReport(int patientId, string startDate, string endDate)
         {
-            service.GetPatientReport(GetById(patientId), Tools.ParseDate(startDate), Tools.ParseDate(endDate));
+            service.GetPatientReport(GetById(patientId), TimeTools.ParseDate(startDate), TimeTools.ParseDate(endDate));
         }
 
         internal ObservableCollection<Patient> GetAll()
         {
-            return service.GetAll();
+            return new ObservableCollection<Patient>(service.GetAll());
         }
 
         internal Patient GetById(int patientId)

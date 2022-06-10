@@ -61,8 +61,8 @@ namespace HealthcareMD.ViewModel
             firstName = p.Ime;
             lastName = p.Prezime;
             allergens = p.GetAllergens();
-            Reports = patientController.GetReports(idPatient);
-            Prescriptions = patientController.GetPrescriptions(idPatient);
+            reports = patientController.GetReports(idPatient);
+            prescriptions = patientController.GetPrescriptions(idPatient);
             birthDate = p.DatumRodjenja.ToString("dd/MM/yyyy");
             address = p.Adresa;
             if (p.pol == HealthcareMD.Gender.male)

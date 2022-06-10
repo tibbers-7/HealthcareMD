@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
-        xmlns:local="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:DoctorHomeViewModel}"
+        xmlns:local="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel" xmlns:Tools="clr-namespace:HealthcareMD.Tools" d:DataContext="{d:DesignInstance Type=viewmodel:DoctorHomeViewModel}"
         mc:Ignorable="d" 
         Title="DoctorHome" Height="580" Width="1042" d:DesignHeight="580" d:DesignWidth="1042" FontSize="13" FontFamily="Yu Gothic" >
 
     <Window.Resources>
+        <Tools:ImageConverter x:Key="ImageConverter"/>
         <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -74,6 +75,8 @@
             </Grid>
         </ControlTemplate>
 
+        
+
     </Window.Resources>
     <Grid>
 
@@ -134,13 +137,24 @@
                                 <Style TargetType="ListViewItem">
                                     <EventSetter Event="MouseDoubleClick" Handler="Vacations_DoubleClick" />
                                 </Style>
+                                
                             </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Period" Width="240" DisplayMemberBinding="{Binding Period}"/>
-                                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}"/>
+                                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Image}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Status, Converter={StaticResource ImageConverter}}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
                                 </GridView>
+                                
+
                             </ListView.View>
+                           
                         </ListView>
                     </Border>
                     <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="54,344,327,10" />

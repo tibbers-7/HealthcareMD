@@ -9,6 +9,7 @@ using Model;
 using System.Windows;
 using System.Windows.Controls;
 using HealthcareMD.Controller;
+using Tools;
 
 namespace HealthcareMD.ViewModel
 {
@@ -25,7 +26,7 @@ namespace HealthcareMD.ViewModel
         private VacationController vacationController;
         private int vacationId;
         private DateOnly requestDate;
-        public string RequestDate { get { return requestDate.ToString(); } set { requestDate = Tools.ParseDate(RequestDate); } }
+        public string RequestDate { get { return requestDate.ToString(); } set { requestDate = TimeTools.ParseDate(RequestDate); } }
         public VacationViewModel(int vacationId)
         {
             var app = Application.Current as App;

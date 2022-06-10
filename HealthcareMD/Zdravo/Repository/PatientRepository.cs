@@ -15,7 +15,7 @@ namespace Repository
 {
     public class PatientRepository
    {
-      private ObservableCollection<Patient> patients;
+      private List<Patient> patients;
         private ReportRepository reportRepo;
         private PrescriptionRepository prescRepo;
         private List<ChosenDoctors> chosenDoctors;
@@ -24,38 +24,24 @@ namespace Repository
         {
             fileHandler = new PatientFileHandler();
             patients = fileHandler.read();
-            reportRepo = reportRepository;
-            prescRepo = prescRepository;
-
-
-            BindPrescriptions();
-            BindReports();
+            this.reportRepo = reportRepository;
+            this.prescRepo = prescRepository;
             BindDoctors();
+            Init();
         }
 
-        internal void BindPrescriptions()
+        private void Init()
         {
-            
-            foreach (Patient patient in patients)
+            foreach (Report report in reportRepo.GetReports())
             {
-                foreach (Prescription presc in prescRepo.prescriptions)
-                {
-                    if (patient.Id==presc.PatientId) patient.AddPrescription(presc);
-                }
+                if (GetById(report.PatientId) != null) GetById(report.PatientId).AddReport(report);
+            }
+
+            foreach (Prescription presc in prescRepo.prescriptions)
+            {
+                if (GetById(presc.PatientId) != null) GetById(presc.PatientId).AddPrescription(presc);
             }
         }
-
-        internal void BindReports()
-        {
-            foreach(Patient patient in patients)
-            {
-                foreach (Report report in reportRepo.GetReports())
-                {
-                    if (patient.Id ==report.PatientId) patient.AddReport(report);
-                }
-            }
-        }
-
         internal void BindDoctors()
         {
             InitChosenDoctors();
@@ -95,9 +81,8 @@ namespace Repository
             patient.Allergens.Remove(allergen);
             fileHandler.updatePatient(patient);
         }
-      public ObservableCollection<Patient> GetAll()
-      {
-            patients = new ObservableCollection<Patient> (fileHandler.Load());
+      public List<Patient> GetAll() { 
+
             return patients;
       }
       

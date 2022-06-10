@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HealthcareMD.Repository;
 using HealthcareMD.Model;
+using Tools;
 
 namespace HealthcareMD.Service
 {
@@ -78,7 +79,7 @@ namespace HealthcareMD.Service
             Patient p = patientService.GetById(patientId);
             if (p == null) return 1;
 
-            if (Tools.IsInPast(appt.Date, appt.Time)) return 2;
+            if (TimeTools.IsInPast(appt.Date, appt.Time)) return 2;
 
             if (doctorSpec!=null)
             {
@@ -109,7 +110,7 @@ namespace HealthcareMD.Service
         {
             Patient p = patientService.GetById(appt.Patient);
             if (p == null) return 1;
-            if (Tools.IsInPast(appt.Date,appt.Time)) return 2;
+            if (TimeTools.IsInPast(appt.Date,appt.Time)) return 2;
 
 
             return appointmentRepo.Update(appt);
@@ -121,7 +122,7 @@ namespace HealthcareMD.Service
             List<Appointment> todaysAppointments = new List<Appointment>();
             foreach (Appointment appt in GetAllForDoctor(doctorId))
             {
-                if (Tools.IsToday(appt.Date)) todaysAppointments.Add(appt);
+                if (TimeTools.IsToday(appt.Date)) todaysAppointments.Add(appt);
             }
             return todaysAppointments;
         }

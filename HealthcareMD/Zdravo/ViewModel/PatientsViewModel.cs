@@ -25,7 +25,7 @@ namespace HealthcareMD.ViewModel
             {
                 if (patients == value)
                     return;
-                patients = p.read();
+                patients = new ObservableCollection<Patient>(p.read());
                 NotifyPropertyChanged("Patients");
             }
         }
@@ -33,11 +33,11 @@ namespace HealthcareMD.ViewModel
         public PatientsViewModel()
         {
             p = new PatientFileHandler();
-            patients = p.read();
+            patients = new ObservableCollection<Patient>(p.read());
         }
         public void Refresh()
         {
-            patients = p.read();
+            patients = new ObservableCollection<Patient>(p.read());
         }
         protected void NotifyPropertyChanged(string propertyName)
         {

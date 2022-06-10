@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HealthcareMD;
 using HealthcareMD.Controller;
+using Tools;
 
 namespace Model
 {
@@ -20,7 +21,7 @@ namespace Model
         public TimeOnly Time { get { return time; } set { time = value; } }
         private DateOnly date;
         public DateOnly Date { get { return date; } set { date = value; } }
-        public string DateString { get { return date.ToString("dd/MM/yyyy"); } set { date = Tools.ParseDate(value); } }
+        public string DateString { get { return date.ToString("dd/MM/yyyy"); } set { date = TimeTools.ParseDate(value); } }
         private int duration;
         public int Duration { get { return duration; } set { duration = value; } }
         private int doctor;

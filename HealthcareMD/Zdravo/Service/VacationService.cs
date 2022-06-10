@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HealthcareMD;
+using Tools;
 
 namespace Service
 {
@@ -45,7 +46,7 @@ namespace Service
             List<VacationString> vacationStrings = new List<VacationString>();
             foreach(VacationString vacationString in GetDoctorVacationStrings(doctorId))
             {
-                if (!Tools.IsInPast(vacationString.vacation.EndDate, new TimeOnly(0, 0)))
+                if (!TimeTools.IsInPast(vacationString.vacation.EndDate, new TimeOnly(0, 0)))
                     vacationStrings.Add(vacationString);
             }
             return vacationStrings;
