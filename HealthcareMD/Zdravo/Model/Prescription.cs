@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthcareMD.Repository;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Model
@@ -29,6 +31,14 @@ namespace Model
         internal string ToCSV()
         {
             return "#"+id.ToString()+"#" + patientId.ToString() + "#" + drugId.ToString() + "#" + date.ToString();
+        }
+
+        internal List<string> GetPrescriptionInfo(string drugName,int count)
+        {
+            List<string> prescInfo = new List<string>();
+            prescInfo.Add(count + ". " + date.ToString("dd/MM/yyyy"));
+            prescInfo.Add("\tLEK : " + drugName);
+            return prescInfo;
         }
     }
 

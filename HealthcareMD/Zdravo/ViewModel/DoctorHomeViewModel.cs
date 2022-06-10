@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using HealthcareMD.Controller;
 using HealthcareMD.DoctorView;
 using HealthcareMD.DoctorWindows;
+using HealthcareMD.View;
 
 namespace HealthcareMD.ViewModel
 {
@@ -133,8 +134,11 @@ namespace HealthcareMD.ViewModel
             newAppointment.Show();
         }
 
-        
-
+        internal void PatientReportForm(int patientId)
+        {
+            PatientReportForm patientReportForm = new PatientReportForm(patientId);
+            patientReportForm.Show();
+        }
 
         internal void UpdateAppointment(int id)
         {

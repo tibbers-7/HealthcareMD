@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using HealthcareMD.Controller;
 using HealthcareMD.DoctorWindows;
+using System.Windows;
 
 namespace HealthcareMD.ViewModel
 {
@@ -9,10 +10,12 @@ namespace HealthcareMD.ViewModel
     {
         private ObservableCollection<Patient> patients;
         public ObservableCollection<Patient> Patients { get { return patients; } set { patients = value; } }
-        private PatientController patientController = new PatientController();
+        private PatientController patientController;
 
         public ChoosePatientViewModel()
         {
+            var app=Application.Current as App;
+            patientController = app.patientController;
             patients = patientController.GetAll();
         }
 

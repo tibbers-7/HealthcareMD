@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\App.xaml
-112045957531
+12-789877439
 
-991876548240
-1941645785384
-DoctorHome.xaml;MainWindow.xaml;View\ChoosePatient.xaml;View\DrugReportWindow.xaml;View\DrugWindow.xaml;View\NewAppointment.xaml;View\PatientChart.xaml;View\PrescriptionWindow.xaml;View\ReferralWindow.xaml;View\ReportWindow.xaml;View\VacationWindow.xaml;
+1021767148978
+214-469527980
+DoctorHome.xaml;MainWindow.xaml;View\ChoosePatient.xaml;View\DrugReportWindow.xaml;View\DrugWindow.xaml;View\NewAppointment.xaml;View\PatientChart.xaml;View\PatientReportForm.xaml;View\PrescriptionWindow.xaml;View\ReferralWindow.xaml;View\ReportWindow.xaml;View\VacationWindow.xaml;
 
 False
 

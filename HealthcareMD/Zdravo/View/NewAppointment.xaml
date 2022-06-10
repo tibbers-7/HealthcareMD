@@ -56,27 +56,26 @@
         </Border>
 
         <!-- Buttons -->
-        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="17,355,219,10" Grid.Column="1">
-            <Grid>
-                <Button x:Name="Schedule" Content="" Margin="10,4,10,29" Click="ScheduleButton_Click" BorderBrush="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Resources/acceptWhite.png"/>
-                    </Button.Background>
-                </Button>
-                <Label Content="Prihvati" Foreground="White" Margin="-4,36,-7,-36"/>
-            </Grid>
+        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="17,345,219,10" Grid.Column="1">
+
+            <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="ScheduleButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="83" Width="75">
+                    <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
+                    <Label Content="Prihvati" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="13"/>
+
+                </StackPanel>
+            </Button>
+
         </Border>
 
 
-        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="127,355,106,10" Grid.Column="1">
-            <Grid>
-                <Label Content="Otkaži" Foreground="White" Margin="5,37,0,-37"/>
-                <Button Content="" Margin="10,4,10,28" Click="CancelButton_Click" BorderBrush="{x:Null}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Resources/cancelWhite.png"/>
-                    </Button.Background>
-                </Button>
-            </Grid>
+        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="127,345,106,10" Grid.Column="1">
+            <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="69" Width="89" HorizontalAlignment="Center">
+                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
+                    <Label Content="Otkaži" HorizontalContentAlignment="Center" Foreground="White" FontSize="13"/>
+                </StackPanel>
+            </Button>
         </Border>
 
         <!-- Date Group -->

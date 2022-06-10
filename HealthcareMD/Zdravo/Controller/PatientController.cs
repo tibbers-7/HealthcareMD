@@ -16,8 +16,13 @@ namespace HealthcareMD.Controller
 {
     public class PatientController
    {
-        private PatientService service=new PatientService();
+        private PatientService service;
         private PatientRepository p;
+
+        public PatientController(PatientService patientService)
+        {
+            this.service = patientService;
+        }
       public Patient CreatePatient(TextBox tbIme, TextBox tbPrezime, int tbId, TextBox tbUsername, TextBox tbSifra, TextBox tbTelefon, TextBox tbDatum,ComboBox cbPol, TextBox tbAdresa,CheckBox checkBoxGuest, TextBox tbMail)
         {
             // TODO: implement
@@ -40,6 +45,11 @@ namespace HealthcareMD.Controller
             Patient p = new Patient(ime, prezime, tbId, username, sifra, telefon, datumRodjenja, pol, adresa, guest, email);
             return p;
       }
+
+        internal void GetPatientReport(int patientId, string startDate, string endDate)
+        {
+            service.GetPatientReport(patientId, startDate, endDate);
+        }
 
         internal ObservableCollection<Patient> GetAll()
         {

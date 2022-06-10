@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace HealthcareMD
 {
     internal class Tools
+
+        
     {
         public static bool IsInPast(DateOnly date, TimeOnly time)
         {
@@ -38,6 +40,11 @@ namespace HealthcareMD
             return false;
         }
 
+        public static bool IsDateBetween(DateOnly dateInQuestion, DateOnly startDate, DateOnly endDate)
+        {
+            if (dateInQuestion.CompareTo(startDate) < 0 | dateInQuestion.CompareTo(endDate)>0) return false;
+            return true;
+        }
         
     }
 }

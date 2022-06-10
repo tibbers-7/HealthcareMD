@@ -29,6 +29,10 @@
     <None Remove="Resources\reportInvalid.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="7.2.2" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

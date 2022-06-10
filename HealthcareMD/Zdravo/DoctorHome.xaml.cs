@@ -143,5 +143,10 @@ namespace HealthcareMD
             else MessageBox.Show("Niste odabrali pregled!");
         }
 
+        private void PatientReportClick(object sender, RoutedEventArgs e)
+        {
+            object item = PatientTable.SelectedItem;
+            viewModel.PatientReportForm(int.Parse((PatientTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
+        }
     }
 }

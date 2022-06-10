@@ -1,1 +1,2 @@
-# SiMS-proj
+# HealthcareMD
+# University project for Software Modeling

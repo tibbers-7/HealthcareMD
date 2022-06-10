@@ -12,7 +12,7 @@ namespace HealthcareMD.ViewModel
 {
     public class PatientChartViewModel
     {
-        private PatientController patientController = new PatientController();
+        private PatientController patientController;
         private AppointmentController appointmentController;
         private int idPatient;
         public int IdPatient { get { return idPatient; } set { idPatient = value; } }
@@ -43,6 +43,7 @@ namespace HealthcareMD.ViewModel
             var app = Application.Current as App;
             appointmentController = app.appointmentController;
             drugController = app.drugController;
+            patientController = app.patientController;
 
             Patient p=patientController.GetById(patientId);
             if (p == null)

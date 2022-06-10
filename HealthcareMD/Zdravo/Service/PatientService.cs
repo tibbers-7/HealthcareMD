@@ -4,10 +4,15 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
+using HealthcareMD;
+using HealthcareMD.FileHandler;
+using HealthcareMD.Repository;
 using Model;
 using Repository;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
 
 namespace Service
 {
@@ -18,22 +23,15 @@ namespace Service
 
         private PatientRepository p;
         private DoctorRepository doctorRepository;
-        public PatientService()
+        private DrugRepository drugRepository;
+        private List<string> prescLines;
+        private List<string> reportLines;
+        private string info;
+        public PatientService(DrugRepository drugRepository,PatientRepository patientRepository,DoctorRepository doctorRepository)
         {
-            p = new PatientRepository();
-            ReportRepository reportRepository = new ReportRepository();
-            PrescriptionRepository prescriptionRepository = new PrescriptionRepository();
-            doctorRepository = new DoctorRepository();
-
-            foreach (Report report in reportRepository.GetReports())
-            {
-                if(p.GetById(report.PatientId)!=null) p.GetById(report.PatientId).AddReport(report);
-            }
-
-            foreach(Prescription presc in prescriptionRepository.prescriptions)
-            {
-                if (p.GetById(presc.PatientId) != null) p.GetById(presc.PatientId).AddPrescription(presc);
-            }
+            this.drugRepository = drugRepository;
+            p = patientRepository;
+            
 
 
         }
@@ -58,6 +56,49 @@ namespace Service
         {
             Patient patient = p.GetById(patientId);
             return new ObservableCollection<Prescription>(patient.Prescriptions);
+        }
+
+        internal void GetPatientReport(int patientId, string startDateString, string endDateString)
+        {
+            ReportPDF reportPdfWriter = new ReportPDF();
+            Patient patient= GetById(patientId);
+            p.BindReports();
+            p.BindPrescriptions();
+
+            GetReportLines(patient, Tools.ParseDate(startDateString), Tools.ParseDate(endDateString));
+
+            string fileName = patient.Ime + patient.Prezime + "_" + DateOnly.FromDateTime(DateTime.Now).ToString("dd.MM.yyyy")+".pdf";
+            reportPdfWriter.CreateReport(info,reportLines,prescLines,fileName);
+            
+        }
+
+        internal void GetReportLines(Patient patient,DateOnly startDate, DateOnly endDate)
+        {
+            reportLines = new List<string>();
+            prescLines = new List<string>();
+            info=patient.Ime + " " + patient.Prezime + " : " + startDate.ToString("dd/MM/yyyy") + " - " + endDate.ToString("dd/MM/yyyy");
+
+            int reportCount=1;
+            foreach (Report report in patient.Reports)
+            {
+                if (Tools.IsDateBetween(report.Date, startDate, endDate))
+                {
+                    reportLines.AddRange(report.GetReportInfo(reportCount++));
+                    reportLines.Add("\n");
+                }
+            }
+
+            int prescCount = 1;
+            foreach (Prescription prescription in patient.Prescriptions)
+            {
+                if (Tools.IsDateBetween(prescription.Date, startDate, endDate))
+                {
+                    string drugName = drugRepository.GetById(prescription.DrugId).Name;
+                    prescLines.AddRange(prescription.GetPrescriptionInfo(drugName,prescCount++));
+                    prescLines.Add("\n");
+                }
+            }
+
         }
 
         internal ObservableCollection<Patient> GetAll()

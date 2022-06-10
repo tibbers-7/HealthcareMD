@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Model
@@ -32,6 +33,16 @@ namespace Model
         internal string ToCSV()
         {
             return "#"+id.ToString()+"#"+patientId.ToString()+"#"+diagnosis+"#"+date.ToString()+"#"+ reportString+"#"+anamnesis;
+        }
+
+        internal List<string> GetReportInfo(int count)
+        {
+            List<string> reportInfo = new List<string>();
+            reportInfo.Add(count + ". " + date.ToString("dd/MM/yyyy"));
+            reportInfo.Add("\tDIJAGNOZA : " + diagnosis);
+            reportInfo.Add("\tIZVEŠTAJ : " + reportString);
+            reportInfo.Add("\tANAMNEZA : " + anamnesis);
+            return reportInfo;
         }
     }
 }

@@ -164,7 +164,7 @@
 
                             <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="55,10,207,385">
 
-                                <Button x:Name="PrescriptionBtn_Copy" HorizontalAlignment="Center" VerticalAlignment="Center" Height="118" Width="89" Click="Prescription_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                                <Button x:Name="ReportBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Height="118" Width="89" Click="Report_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                                     <StackPanel>
                                         <Image Source="/Resources/reportWhite.png" Stretch="Uniform" Width="50" Height="50" Margin="0,12,0,0"/>
                                         <Label x:Name="reportLabel" Content="Izveštaj" FontSize="15" FontWeight="Normal" Foreground="White" Width="85" Margin="5,0,0,10"/>
@@ -291,12 +291,12 @@
             </TabItem>
             <TabItem Style="{DynamicResource TabItemStyle}" Header="Kartoni" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid Background="#FFF0F7F4" Width="910">
-                    <Border BorderBrush="#70ABAF"  BorderThickness="3" CornerRadius="8" Margin="10,10,10,10">
+                    <Border BorderBrush="#70ABAF"  BorderThickness="3" CornerRadius="8"  Margin="121,10,10,10">
                         <DataGrid ColumnWidth="*" x:Name="PatientTable"
                             IsReadOnly ="True"  SelectionMode="Single"
                             ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="False"
-                            Margin="0,7,0,25" HorizontalAlignment="Center" Width="870" Background="#FFDCE1DE" FontWeight="Normal" >
+                            Margin="0,7,0,25" HorizontalAlignment="Center" Width="758" Background="#FFDCE1DE" FontWeight="Normal" >
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridRow}">
                                     <EventSetter Event="Control.MouseDoubleClick" Handler="PatientRow_DoubleClick"/>
@@ -311,6 +311,16 @@
 
                             </DataGrid.Columns>
                         </DataGrid>
+                    </Border>
+                    <Border Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="18,117,794,325">
+                        <Grid>
+                            <Button Click="PatientReportClick" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
+                                <StackPanel>
+                                    <Image Source="/Resources/reportWhite.png" Stretch="Uniform" Height="50" Width="50"/>
+                                    <Label Content="Izveštaj" Foreground="White" FontSize="15"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                     </Border>
                 </Grid>
             </TabItem>

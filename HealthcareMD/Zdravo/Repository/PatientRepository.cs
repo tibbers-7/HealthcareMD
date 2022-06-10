@@ -24,7 +24,31 @@ namespace Repository
             fileHandler = new PatientFileHandler();
             patients = fileHandler.read();
             reportRepo = new ReportRepository();
+
+
+            BindPrescriptions();
+            BindReports();
             BindDoctors();
+        }
+
+        internal void BindPrescriptions()
+        {
+            PrescriptionRepository prescriptionRepository = new PrescriptionRepository();
+            foreach (Prescription presc in prescriptionRepository.prescriptions)
+            {
+                Patient patient=GetById(presc.PatientId);
+                if(patient!=null) patient.AddPrescription(presc);
+            }
+        }
+
+        internal void BindReports()
+        {
+            ReportRepository reportRepository = new ReportRepository();
+            foreach (Report report in reportRepository.GetReports())
+            {
+                Patient patient = GetById(report.PatientId);
+                if (patient != null) patient.AddReport(report);
+            }
         }
 
         internal void BindDoctors()
@@ -38,6 +62,7 @@ namespace Repository
                 }
             }
         }
+
 
         private void InitChosenDoctors()
         {

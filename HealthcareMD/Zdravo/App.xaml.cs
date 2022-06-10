@@ -43,7 +43,7 @@ namespace HealthcareMD
             var ingredientRepository = new IngredientRepository();
 
 
-            var patientService = new PatientService();
+            var patientService = new PatientService(drugRepository,patientRepository,doctorRepository);
             var drugService = new DrugService(drugRepository,drugReportRepository);
             var appointmentService = new AppointmentService(appointmentRepository, drugRepository, prescriptionRepository, reportRepository,patientService);
             var vacationService = new VacationService(vacationRepository,doctorRepository);
@@ -54,7 +54,7 @@ namespace HealthcareMD
             var ingredientService = new IngredientService(ingredientRepository);
 
             drugController = new DrugController(drugService);
-            patientController = new PatientController();
+            patientController = new PatientController(patientService);
             appointmentController = new AppointmentController(appointmentService,patientController,doctorRepository,drugController,reportPrescriptionService);
             allergenController = new AllergenController();
             roomController = new RoomController();
