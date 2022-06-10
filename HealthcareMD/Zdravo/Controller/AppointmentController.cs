@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using HealthcareMD.Service;
+using HealthcareMD.Model;
 
 namespace HealthcareMD.Controller
 {
@@ -92,6 +93,11 @@ namespace HealthcareMD.Controller
         {
             Prescription presc = new Prescription() { Date = DateOnly.FromDateTime(DateTime.Now), PatientId = patient };
             return reportPrescriptionService.AddPrescription(presc,drugId);
+        }
+
+        internal List<AppointmentData> GetAppointmentData(int doctorId)
+        {
+            return service.GetAppointmentData(doctorId);
         }
 
         public int DeleteAppointment(int id)

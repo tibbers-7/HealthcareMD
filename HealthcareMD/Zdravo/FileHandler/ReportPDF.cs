@@ -26,8 +26,6 @@ namespace HealthcareMD.FileHandler
             document.Close();
 
             byte[] byte1 = baos.ToArray();
-            // C:\Users\Anja\Documents\HealthcareMD
-            
             using (FileStream fs = File.Create(projectPath+"\\Reports\\"+fileName)) { fs.Write(byte1, 0, (int)byte1.Length); }
         }
 
@@ -36,18 +34,28 @@ namespace HealthcareMD.FileHandler
 
             document.Add(new Paragraph(info));
             document.Add(new Paragraph("\n"));
-            document.Add(new Paragraph("-----------------------------------------------------------"));
+            
             document.Add(new Paragraph("\t\tIZVEŠTAJI"));
-            foreach(string reportLine in reportLines) { 
-                document.Add(new Paragraph(reportLine));
+            document.Add(new Paragraph("-----------------------------------------------------------"));
+            if (reportLines.Count==0) document.Add(new Paragraph("Nema izveštaja za dati period."));
+            else
+            {
+                foreach (string reportLine in reportLines)
+                {
+                    document.Add(new Paragraph(reportLine));
+                }
             }
             document.Add(new AreaBreak());
             document.Add(new Paragraph("\t\tRECEPTI"));
-            foreach (string prescriptionLine in prescriptionLines)
+            document.Add(new Paragraph("-----------------------------------------------------------"));
+            if (prescriptionLines.Count==0) document.Add(new Paragraph("Nema recepata za dati period."));
+            else
             {
-                document.Add(new Paragraph(prescriptionLine));
+                foreach (string prescriptionLine in prescriptionLines)
+                {
+                    document.Add(new Paragraph(prescriptionLine));
+                }
             }
-            
 
         }
     }

@@ -46,9 +46,16 @@ namespace HealthcareMD.Controller
             return p;
       }
 
+        internal string GetFullName(int patientId)
+        {
+            Patient patient=GetById(patientId);
+            string res = patient.Ime + " " + patient.Prezime;
+            return res;
+        }
+
         internal void GetPatientReport(int patientId, string startDate, string endDate)
         {
-            service.GetPatientReport(patientId, startDate, endDate);
+            service.GetPatientReport(GetById(patientId), Tools.ParseDate(startDate), Tools.ParseDate(endDate));
         }
 
         internal ObservableCollection<Patient> GetAll()
@@ -61,7 +68,7 @@ namespace HealthcareMD.Controller
             return service.GetById(patientId);
         }
 
-        public bool DeletePatient(Patient izabran)
+      /*  public bool DeletePatient(Patient izabran)
       {
             // TODO: implement
             p = new PatientRepository();
@@ -81,7 +88,7 @@ namespace HealthcareMD.Controller
          
             }
             return false;
-      }
+      }*/
 
         internal Doctor GetChosenDoctor(string doctorSpecialty,int patientId)
         {

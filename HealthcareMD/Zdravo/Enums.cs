@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * Module:  Gender.cs
  * Author:  Darko
  * Purpose: Definition of the Enum Model.Gender
@@ -55,5 +55,17 @@ namespace HealthcareMD
         accepted,
         denied,
         waiting
+    }
+
+    public enum WeekDays
+    {
+        PON,
+        UTO,
+        SRE,
+        ČET,
+        PET,
+        SUB,
+        NED
+
     }
 }

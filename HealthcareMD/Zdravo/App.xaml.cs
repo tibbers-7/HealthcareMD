@@ -29,37 +29,33 @@ namespace HealthcareMD
         public IngredientController ingredientController;
         public App()
         {
-            
+            var roomRepository=new RoomRepository();
             var allergenRepository = new AllergenRepository();
             var doctorRepository = new DoctorRepository();
             var drugRepository=new DrugRepository();
             var reportRepository = new ReportRepository();
-            var equipmentRepository = new EquipmentRepository();
-            var patientRepository=new PatientRepository();
             var prescriptionRepository = new PrescriptionRepository();
+            var patientRepository=new PatientRepository(reportRepository,prescriptionRepository);
             var appointmentRepository = new AppointmentRepository(doctorRepository,patientRepository);
             var vacationRepository = new VacationRepository();
             var drugReportRepository = new DrugReportRepository();
-            var ingredientRepository = new IngredientRepository();
 
-
+            var roomService=new RoomService(roomRepository);
+            var allergenService = new AllergenService(allergenRepository);
             var patientService = new PatientService(drugRepository,patientRepository,doctorRepository);
             var drugService = new DrugService(drugRepository,drugReportRepository);
             var appointmentService = new AppointmentService(appointmentRepository, drugRepository, prescriptionRepository, reportRepository,patientService);
             var vacationService = new VacationService(vacationRepository,doctorRepository);
-            var allergenService = new AllergenService();
-            var roomService = new RoomService();
             //var timeService = new TimeService();
             var reportPrescriptionService = new ReportPrescriptionService(reportRepository,patientRepository,prescriptionRepository);
-            var ingredientService = new IngredientService(ingredientRepository);
+            
 
             drugController = new DrugController(drugService);
             patientController = new PatientController(patientService);
             appointmentController = new AppointmentController(appointmentService,patientController,doctorRepository,drugController,reportPrescriptionService);
-            allergenController = new AllergenController();
-            roomController = new RoomController();
+            allergenController = new AllergenController(allergenService);
+            roomController = new RoomController(roomService);
             vacationController = new VacationController(vacationService);
-            ingredientController = new IngredientController(ingredientService);
 
             
         }

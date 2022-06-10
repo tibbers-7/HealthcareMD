@@ -21,7 +21,7 @@ namespace Service
 
    {
 
-        private PatientRepository p;
+        private PatientRepository patientRepository;
         private DoctorRepository doctorRepository;
         private DrugRepository drugRepository;
         private List<string> prescLines;
@@ -30,15 +30,13 @@ namespace Service
         public PatientService(DrugRepository drugRepository,PatientRepository patientRepository,DoctorRepository doctorRepository)
         {
             this.drugRepository = drugRepository;
-            p = patientRepository;
-            
-
-
+            this.doctorRepository = doctorRepository;
+            this.patientRepository = patientRepository;
         }
         public string checkId()
         {
             
-            ObservableCollection<Patient> patients = p.GetAll();
+            ObservableCollection<Patient> patients = patientRepository.GetAll();
             int sifra = 0;
             for(int i = 0; i < patients.Count; i++)
             {
@@ -47,27 +45,19 @@ namespace Service
             return sifra.ToString();
         }
 
-        public void removeAllergen(Patient patient,Allergen allergen)
-        {
-            p = new PatientRepository();
-            p.removeAllergen(patient,allergen);
-        }
         internal ObservableCollection<Prescription> GetPrescriptions(int patientId)
         {
-            Patient patient = p.GetById(patientId);
+            Patient patient = GetById(patientId);
             return new ObservableCollection<Prescription>(patient.Prescriptions);
         }
 
-        internal void GetPatientReport(int patientId, string startDateString, string endDateString)
+        internal void GetPatientReport(Patient patient, DateOnly startDate, DateOnly endDate)
         {
             ReportPDF reportPdfWriter = new ReportPDF();
-            Patient patient= GetById(patientId);
-            p.BindReports();
-            p.BindPrescriptions();
 
-            GetReportLines(patient, Tools.ParseDate(startDateString), Tools.ParseDate(endDateString));
+            GetReportLines(patient, startDate , endDate);
 
-            string fileName = patient.Ime + patient.Prezime + "_" + DateOnly.FromDateTime(DateTime.Now).ToString("dd.MM.yyyy")+".pdf";
+            string fileName = patient.Ime + patient.Prezime + "_" + startDate.ToString("dd.MM.yyyy")+"-"+endDate.ToString("dd.MM.yyyy")+".pdf";
             reportPdfWriter.CreateReport(info,reportLines,prescLines,fileName);
             
         }
@@ -103,24 +93,24 @@ namespace Service
 
         internal ObservableCollection<Patient> GetAll()
         {
-            return p.GetAll();
+            return patientRepository.GetAll();
         }
 
         internal Patient GetById(int patientId)
         {
-            return p.GetById(patientId);
+            return patientRepository.GetById(patientId);
         }
 
         internal ObservableCollection<Report> GetReports(int patientId)
         {
-            Patient patient = p.GetById(patientId);
+            Patient patient = patientRepository.GetById(patientId);
             return new ObservableCollection<Report>(patient.Reports);
         }
 
         internal Doctor GetChosenDoctor(string doctorSpecialty,int patientId)
         {
             
-            Patient patient=p.GetById(patientId);
+            Patient patient=patientRepository.GetById(patientId);
             Doctor doctor=new Doctor();
             foreach (int doctorId in patient.ChosenDoctors)
             {

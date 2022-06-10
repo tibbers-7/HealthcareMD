@@ -1,4 +1,4 @@
-// File:    AppointmentRepository.cs
+﻿// File:    AppointmentRepository.cs
 // Author:  Anja
 // Created: Monday, March 28, 2022 3:16:12 PM
 // Purpose: Definition of Class AppointmentRepository
@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using HealthcareMD.Controller;
+using HealthcareMD.Model;
 
 namespace HealthcareMD.Repository
 {
@@ -21,12 +22,15 @@ namespace HealthcareMD.Repository
         private DoctorRepository doctorRepository;
         private PatientRepository patientRepository;
         private int errorCode;
+        private List<AppointmentData> appointmentData;
+        public List<AppointmentData> AppointmentData { get { return appointmentData; } set { appointmentData = value; } }
         public AppointmentRepository(DoctorRepository doctorRepository,PatientRepository patientRepository)
         {
             
             InitList();
             this.patientRepository = patientRepository;
             this.doctorRepository=doctorRepository;
+            InitData();
         }
 
         private void InitList()
@@ -39,6 +43,20 @@ namespace HealthcareMD.Repository
                 Appointment appointment = (Appointment) appt;
                 appointments.Add(appointment);
             }
+        }
+
+        private void InitData()
+        {
+            appointmentData=new List<AppointmentData>();
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Monday});
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Tuesday });
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Wednesday });
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Thursday });
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Friday });
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Saturday });
+            appointmentData.Add(new AppointmentData { Day = DayOfWeek.Sunday });
+
+
         }
 
         public List<Appointment> GetAll()

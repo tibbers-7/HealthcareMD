@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using HealthcareMD.ViewModel;
 using System.Windows.Threading;
+using Model;
 
 namespace HealthcareMD
 {
@@ -10,10 +11,11 @@ namespace HealthcareMD
     {
 
         private DoctorHomeViewModel viewModel;
+        private int doctorId;
 
         public DoctorHome(int doctorId)
         {
-            
+            this.doctorId = doctorId;
             viewModel = new DoctorHomeViewModel(doctorId);
             DataContext = viewModel;
             InitializeComponent();
@@ -82,8 +84,23 @@ namespace HealthcareMD
         private void NewAppointment_Click(object sender, RoutedEventArgs e)
         {
             viewModel.NewAppointment();
-            
+            Plot.InvalidatePlot(true);
         }
+
+        private void TodaysAppts_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            Appointment appt = (Appointment) item.Content;
+            viewModel.AppointmentShow(appt.Id);
+        }
+
+        private void Vacations_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            Vacation vacation = (Vacation)item.Content;
+            viewModel.VacationShow(vacation.Id);
+        }
+
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {

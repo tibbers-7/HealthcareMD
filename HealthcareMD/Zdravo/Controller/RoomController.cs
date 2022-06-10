@@ -3,15 +3,16 @@ using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HealthcareMD;
+using Service;
 
 namespace Controller
 {
    public class RoomController
    {
-      private Service.RoomService roomService;
+      private RoomService roomService;
 
-        public RoomController() {
-            roomService = new Service.RoomService();
+        public RoomController(RoomService roomService) {
+            this.roomService = roomService;
         }
       
       public void Create(int id, int floor, RoomType type, ObservableCollection<int> equipmentIds)

@@ -17,13 +17,15 @@ namespace Repository
    {
       private ObservableCollection<Patient> patients;
         private ReportRepository reportRepo;
+        private PrescriptionRepository prescRepo;
         private List<ChosenDoctors> chosenDoctors;
 
-        public PatientRepository()
+        public PatientRepository(ReportRepository reportRepository, PrescriptionRepository prescRepository)
         {
             fileHandler = new PatientFileHandler();
             patients = fileHandler.read();
-            reportRepo = new ReportRepository();
+            reportRepo = reportRepository;
+            prescRepo = prescRepository;
 
 
             BindPrescriptions();
@@ -33,21 +35,24 @@ namespace Repository
 
         internal void BindPrescriptions()
         {
-            PrescriptionRepository prescriptionRepository = new PrescriptionRepository();
-            foreach (Prescription presc in prescriptionRepository.prescriptions)
+            
+            foreach (Patient patient in patients)
             {
-                Patient patient=GetById(presc.PatientId);
-                if(patient!=null) patient.AddPrescription(presc);
+                foreach (Prescription presc in prescRepo.prescriptions)
+                {
+                    if (patient.Id==presc.PatientId) patient.AddPrescription(presc);
+                }
             }
         }
 
         internal void BindReports()
         {
-            ReportRepository reportRepository = new ReportRepository();
-            foreach (Report report in reportRepository.GetReports())
+            foreach(Patient patient in patients)
             {
-                Patient patient = GetById(report.PatientId);
-                if (patient != null) patient.AddReport(report);
+                foreach (Report report in reportRepo.GetReports())
+                {
+                    if (patient.Id ==report.PatientId) patient.AddReport(report);
+                }
             }
         }
 

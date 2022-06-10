@@ -3,12 +3,19 @@ using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using HealthcareMD.Controller;
 using HealthcareMD.DoctorView;
 using HealthcareMD.DoctorWindows;
 using HealthcareMD.View;
+using System.Collections.Generic;
+using HealthcareMD.Model;
+using OxyPlot;
+using OxyPlot.Legends;
+using OxyPlot.Series;
+using OxyPlot.Axes;
 
 namespace HealthcareMD.ViewModel
 {
@@ -49,8 +56,26 @@ namespace HealthcareMD.ViewModel
         public string DoctorName { get { return doctorName; } set { doctorName = value; } }
         private string doctorProfession;
         public string DoctorProfession { get { return doctorProfession; } set { doctorProfession = value; } }
-        
 
+        private List<AppointmentData> data;
+        public List<AppointmentData> Data {
+            get
+            {
+                return data;
+            }
+            set
+            {
+                if (data == value)
+                    return;
+                data = appointmentController.GetAppointmentData(doctorId);
+                NotifyPropertyChanged("Data");
+            }
+        }
+
+        private List<BarItem> barItems;
+        private BarSeries barSeries;
+        private string[] categorySource;
+        private CategoryAxis categoryAxis;
 
         public DoctorHomeViewModel(int doctorId)
         {
@@ -69,6 +94,47 @@ namespace HealthcareMD.ViewModel
             patients = new ObservableCollection<Patient>(patientController.GetAll());
             doctorName = appointmentController.GetDoctorName(doctorId);
             doctorProfession = appointmentController.GetDoctorProfession(doctorId);
+            data = appointmentController.GetAppointmentData(doctorId);
+            
+            InitOxyChart();
+
+            
+
+        }
+
+        private void InitOxyChart()
+        {
+            model = new PlotModel { Title = "Učestalost zakazivanja pregleda" };
+            GetDataForChart();
+            
+            model.Series.Add(barSeries);
+            model.Axes.Add(categoryAxis);
+        }
+
+        private void GetDataForChart()
+        {
+            barItems = new List<BarItem>();
+            categorySource = new string[data.Count];
+            int i = 0;
+            foreach (AppointmentData data_ in data)
+            {
+                barItems.Add(new BarItem { Value = data_.AppointmentCount });
+                categorySource[i++] = data_.Day.ToString();
+            }
+
+            barSeries = new BarSeries
+            {
+                ItemsSource = barItems,
+                LabelPlacement = LabelPlacement.Inside,
+
+            };
+
+            categoryAxis= new CategoryAxis
+            {
+                Position = AxisPosition.Left,
+                Key = "DaysAxis",
+                ItemsSource = categorySource
+            };
         }
 
         internal void VacationShow(int vacationId)
@@ -104,6 +170,10 @@ namespace HealthcareMD.ViewModel
         {
             UpcomingAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             PassedAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
+            Data = appointmentController.GetAppointmentData(doctorId);
+            //model.InvalidatePlot(true);
+            InitOxyChart();
+            Model.InvalidatePlot(true);
             
         }
 
@@ -314,6 +384,33 @@ namespace HealthcareMD.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!Equals(field, newValue))
+            {
+                field = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                return true;
+            }
+
+            return false;
+        }
+
+        private PlotModel model;
+
+        public PlotModel Model {
+            get
+            {
+                return model;
+            }
+            set
+            {
+                if (model == value)
+                    return;
+                NotifyPropertyChanged("Model");
+            }
         }
 
     }

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
         xmlns:local="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:DoctorHomeViewModel}"
         mc:Ignorable="d" 
         Title="DoctorHome" Height="580" Width="1042" d:DesignHeight="580" d:DesignWidth="1042" FontSize="13" FontFamily="Yu Gothic" >
@@ -84,10 +85,7 @@
         </Grid.ColumnDefinitions>
         <Rectangle Fill="#70ABAF" Grid.ColumnSpan="2" Margin="0,0,777,0"></Rectangle>
 
-        <TabControl TabStripPlacement="Left"  Grid.ColumnSpan="3" HorizontalAlignment="Left" BorderBrush="{x:Null}" FontSize="20">
-            <TabControl.Resources>
-
-            </TabControl.Resources>
+        <TabControl TabStripPlacement="Left"  Grid.ColumnSpan="3" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontSize="20">
             <TabItem Style="{DynamicResource TabItemStyle}" Header="Glavna strana" >
                 <Grid Background="#FFF0F7F4" Margin="0,0,-4,8" Width="925">
                     <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="10,10,327,467">
@@ -113,6 +111,11 @@
                     </Border>
                     <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="10,147,703,211">
                         <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding TodaysAppointments}" FontSize="15" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <EventSetter Event="MouseDoubleClick" Handler="TodaysAppts_DoubleClick" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Vreme" Width="100" DisplayMemberBinding="{Binding Time}"/>
@@ -127,6 +130,11 @@
                     </Border>
                     <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="250,150,327,211">
                         <ListView ItemsSource="{Binding UpcomingVacations}" FontSize="15">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Vacations_DoubleClick" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Period" Width="240" DisplayMemberBinding="{Binding Period}"/>
@@ -135,10 +143,13 @@
                             </ListView.View>
                         </ListView>
                     </Border>
+                    <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="54,344,327,10" />
+
+
                 </Grid>
             </TabItem>
 
-            <TabItem Style="{DynamicResource TabItemStyle}" Width="120"  Header="Pregledi" FontFamily="Yu Gothic"   BorderBrush="{x:Null}" Background="{x:Null}"  >
+            <TabItem Style="{DynamicResource TabItemStyle}"  Header="Pregledi"  FontFamily="Yu Gothic"   BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,0,-1,0"  >
 
                 <Grid Background="#FFF0F7F4" Margin="0,0,-4,8" Width="925">
                     <Grid.ColumnDefinitions>

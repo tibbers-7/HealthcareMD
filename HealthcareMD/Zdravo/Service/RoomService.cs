@@ -15,9 +15,9 @@ namespace Service
       private Repository.RoomRepository roomRepo;
         private AppointmentController appointmentController;
 
-        public RoomService() {
+        public RoomService(RoomRepository roomRepo) {
             var app=Application.Current as App;
-            roomRepo = new Repository.RoomRepository();
+            this.roomRepo = roomRepo;
             appointmentController = app.appointmentController;
         }
       

@@ -34,7 +34,7 @@ namespace HealthcareMD.ViewModel
         private string date;
         public string Date { get { return date; } set { date = value; } }
 
-        private RoomController roomController=new RoomController();
+        private RoomController roomController;
         private int doctorId;
         private ObservableCollection<int> rooms;
         public ObservableCollection<int> Rooms
@@ -58,6 +58,7 @@ namespace HealthcareMD.ViewModel
         {
             var app = Application.Current as App;
             apptController = app.appointmentController;
+            roomController = app.roomController;
             this.id = id;
             this.doctorId = doctorId;
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using HealthcareMD.Repository;
+using HealthcareMD.Model;
 
 namespace HealthcareMD.Service
 {
@@ -41,6 +42,19 @@ namespace HealthcareMD.Service
                         if (appt.Status == HealthcareMD.Status.accepted)
                             doctorsAppointments.Add(appt);
                     }
+                }
+            }
+            return doctorsAppointments;
+        }
+
+        internal List<Appointment> GetAllForDoctor(int doctorId)
+        {
+            doctorsAppointments = new List<Appointment>();
+            foreach (Appointment appt in appointmentRepo.GetAll())
+            {
+                if (appt.Doctor == doctorId)
+                {
+                    doctorsAppointments.Add(appt);
                 }
             }
             return doctorsAppointments;
@@ -105,11 +119,35 @@ namespace HealthcareMD.Service
         internal List<Appointment> GetTodaysAppointments(int doctorId)
         {
             List<Appointment> todaysAppointments = new List<Appointment>();
-            foreach (Appointment appt in GetAppointmentsForDoctor(true, doctorId))
+            foreach (Appointment appt in GetAllForDoctor(doctorId))
             {
                 if (Tools.IsToday(appt.Date)) todaysAppointments.Add(appt);
             }
             return todaysAppointments;
+        }
+
+        internal List<AppointmentData> GetAppointmentData(int doctorId)
+        {
+            List<Appointment> doctorsAppointments = GetAllForDoctor(doctorId);
+            CleanData();
+            foreach(Appointment appointment in doctorsAppointments)
+            {
+                foreach(AppointmentData data in appointmentRepo.AppointmentData)
+                {
+                    if (appointment.Date.DayOfWeek == data.Day)
+                        data.AppointmentCount++;
+                    
+                }
+            }
+            return appointmentRepo.AppointmentData;
+        }
+
+        private void CleanData()
+        {
+            foreach(AppointmentData data in appointmentRepo.AppointmentData)
+            {
+                data.AppointmentCount = 0;
+            }
         }
     }
 }
