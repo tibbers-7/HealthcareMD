@@ -4824,11 +4824,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anja\\Documents\\FAX\\SiMS\\HealthcareMD_\\HealthcareMD_.csproj",
+      "projectUniqueName": "C:\\Users\\Anja\\Documents\\HealthcareMD_\\HealthcareMD_\\HealthcareMD_.csproj",
       "projectName": "HealthcareMD_",
-      "projectPath": "C:\\Users\\Anja\\Documents\\FAX\\SiMS\\HealthcareMD_\\HealthcareMD_.csproj",
+      "projectPath": "C:\\Users\\Anja\\Documents\\HealthcareMD_\\HealthcareMD_\\HealthcareMD_.csproj",
       "packagesPath": "C:\\Users\\Anja\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anja\\Documents\\FAX\\SiMS\\HealthcareMD_\\obj\\",
+      "outputPath": "C:\\Users\\Anja\\Documents\\HealthcareMD_\\HealthcareMD_\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Anja\\AppData\\Roaming\\NuGet\\NuGet.Config",

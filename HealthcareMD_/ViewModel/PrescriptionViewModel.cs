@@ -89,7 +89,7 @@ namespace HealthcareMD_.ViewModel
             
             Drug drug=drugController.GetById(drugId);
             if (drug == null) { MessageBox.Show("Lek ne postoji u bazi!", "Interna greška"); return; };
-            DrugWindow drugWindow = new DrugWindow(null, drugId);
+            DrugWindow drugWindow = new DrugWindow(drugId);
             drugWindow.Show();
         }
     }

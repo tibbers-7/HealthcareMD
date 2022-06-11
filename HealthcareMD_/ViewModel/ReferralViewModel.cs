@@ -40,8 +40,8 @@ namespace HealthcareMD_.ViewModel
         
         private AppointmentController apptController;
         private int errorCode;
-        public MyICommand CancelCommand;
-        public MyICommand AcceptCommand;
+        public MyICommand CancelCommand { get; set; }
+        public MyICommand AcceptCommand { get; set; }
         private ReferralWindow callerWindow;
         public ReferralViewModel(ReferralWindow callerWindow,int doctorId)
         {

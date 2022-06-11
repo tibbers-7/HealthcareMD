@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3vNRnBtit+2teChbSpm6+sCv1JchzFCB+htcI2dU0fmrMLAP2B1X7ix7w75zcXispA0dmRlnssyCsfyp/BttLA==",
+  "dgSpecHash": "DC2DhdgMOatpgbzJMOK1bf2/Uk0Ji9JrkfGNT14FXIzO5UicB2O5GqqXWIitJWBT21mrG4ZcZYShTdFZXpUemw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Anja\\Documents\\FAX\\SiMS\\HealthcareMD_\\HealthcareMD_.csproj",
+  "projectFilePath": "C:\\Users\\Anja\\Documents\\HealthcareMD_\\HealthcareMD_\\HealthcareMD_.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Anja\\.nuget\\packages\\itext7\\7.2.2\\itext7.7.2.2.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\itext7.commons\\7.2.2\\itext7.commons.7.2.2.nupkg.sha512",

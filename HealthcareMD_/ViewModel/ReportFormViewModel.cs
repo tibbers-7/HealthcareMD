@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tools;
+using HealthcareMD_.View;
 
 namespace HealthcareMD_.ViewModel
 {
-    internal class ReportFormViewModel
+    internal class ReportFormViewModel : BindableBase 
     {
         private int patientId;
         private string startDate;
@@ -18,15 +20,31 @@ namespace HealthcareMD_.ViewModel
         private PatientController patientController;
         private string patientName;
         public string PatientName { get { return patientName; } set { patientName = value;} }
-       
-        public ReportFormViewModel(int patientId)
+        public MyICommand AcceptCommand { get; set; }
+        public MyICommand CloseCommand { get; set; }
+        PatientReportForm callerWindow;
+
+        public ReportFormViewModel(PatientReportForm callerWindow, int patientId)
         {
             this.patientId = patientId;
             var app = Application.Current as App;
+            this.callerWindow = callerWindow;
+            AcceptCommand = new MyICommand(Accept);
+            CloseCommand = new MyICommand(Close);
             patientController = app.patientController;
             patientName=patientController.GetFullName(patientId);
         }
+        internal void Accept()
+        {
+            if (callerWindow.startDate_tb.Text != "" && callerWindow.endDate_tb.Text != "") { GetReport(); Close(); }
+            else MessageBox.Show("Niste uneli sve potrebne podatke!", "Greška");
+            
+        }
 
+        internal void Close()
+        {
+            callerWindow.Close();
+        }
         internal void GetReport()
         {
             patientController.GetPatientReport(patientId, StartDate, EndDate);

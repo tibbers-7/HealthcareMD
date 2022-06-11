@@ -2,11 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HealthcareMD_"
         
         mc:Ignorable="d"
         Title="Pregled" Height="464" Width="403" FontSize="15" FontFamily="Yu Gothic">
+
+    <Window.InputBindings>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="X"
+                Command="{Binding CloseCommand}"/>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="A"
+                Command="{Binding AcceptCommand}"/>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="P"
+                Command="{Binding PatientCommand}"/>
+    </Window.InputBindings>
 
     <Window.Resources>
         <ControlTemplate x:Key="validationTemplate">
@@ -52,9 +68,9 @@
                     </Binding>
                 </TextBox>
                 <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="204,10,10,5">
-                    <Button x:Name="patientButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="142" Click="Patient_Click" FontSize="12" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="patientLabel" Content="Pregled Pacijenta" Foreground="White"/>
+                    <Button x:Name="patientButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="164" Click="Patient_Click" FontSize="12" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <StackPanel Orientation="Horizontal" Width="152">
+                            <Label x:Name="patientLabel" Content="Pregled Pacijenta [P]" Foreground="White" FontSize="11"/>
                             <Image Source="/Resources/patientWhite.png" Stretch="Uniform" Height="30" Width="27"/>
                         </StackPanel>
                     </Button>
@@ -68,7 +84,7 @@
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="ScheduleButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="83" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="13"/>
+                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="11"/>
 
                 </StackPanel>
             </Button>
@@ -80,7 +96,7 @@
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="69" Width="89" HorizontalAlignment="Center">
                     <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži" HorizontalContentAlignment="Center" Foreground="White" FontSize="13"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White" FontSize="11"/>
                 </StackPanel>
             </Button>
         </Border>

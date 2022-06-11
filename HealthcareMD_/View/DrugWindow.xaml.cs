@@ -21,9 +21,9 @@ namespace HealthcareMD_.DoctorView
     public partial class DrugWindow : Window
     {
         private DrugViewModel viewModel;
-        public DrugWindow(DoctorHomeViewModel callerWindow,int drugId)
+        public DrugWindow(int drugId)
         {
-            viewModel = new DrugViewModel(callerWindow,drugId);
+            viewModel = new DrugViewModel(this,drugId);
             this.DataContext = viewModel;
             InitializeComponent();
             
@@ -33,7 +33,7 @@ namespace HealthcareMD_.DoctorView
        
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Close();
         }
     }
 }

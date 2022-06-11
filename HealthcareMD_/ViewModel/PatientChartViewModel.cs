@@ -115,7 +115,7 @@ namespace HealthcareMD_.ViewModel
                 MessageBox.Show("Lek ne postoji u bazi!", "Interna greška");
                 return;
             }
-            DrugWindow drugWindow = new DrugWindow(null, drugId);
+            DrugWindow drugWindow = new DrugWindow(drugId);
             drugWindow.Show();
         }
 

@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:HealthcareMD_.View"
         xmlns:HealthcareMD_="clr-namespace:HealthcareMD_" xmlns:viewmodel="clr-namespace:HealthcareMD_.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReportFormViewModel}" x:Class="HealthcareMD_.View.PatientReportForm"
         mc:Ignorable="d"
-        Title="PatientReportForm" Height="276" Width="469" Background="#FFF0F7F4">
+        Title="PatientReportForm" Height="276" Width="469" Background="#FFCBF4E7">
+    <Window.InputBindings>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="X"
+                Command="{Binding CloseCommand}"/>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="A"
+                Command="{Binding AcceptCommand}"/>
+    </Window.InputBindings>
     <Window.Resources>
         <ControlTemplate x:Key="validationTemplate">
             <Grid Height="Auto" Width="Auto">
@@ -26,7 +37,7 @@
     </Window.Resources>
     <Grid>
 
-        <TextBox x:Name="startDate_tb" Margin="22,79,253,130" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="-3.078,-0.132">
+        <TextBox x:Name="startDate_tb" Margin="22,79,253,130" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="-3.078,-0.132" Foreground="#FF4C7F82">
             <Binding Path="StartDate" UpdateSourceTrigger="LostFocus">
                 <Binding.ValidationRules>
                     <HealthcareMD_:DateValidation ValidationStep="RawProposedValue"/>
@@ -34,7 +45,7 @@
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
-        <TextBox x:Name="endDate_tb" Margin="249,79,22,130" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="-3.078,-0.132">
+        <TextBox x:Name="endDate_tb" Margin="249,79,22,130" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="-3.078,-0.132" Foreground="#FF4C7F82">
             <Binding Path="EndDate" UpdateSourceTrigger="LostFocus">
                 <Binding.ValidationRules>
                     <HealthcareMD_:DateValidation ValidationStep="RawProposedValue"/>
@@ -42,25 +53,25 @@
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
-        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="138,135,251,27">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="138,135,251,27">
             <Button x:Name="ReportBttn" Margin="-1,-1,-1,-1" Click="GetReport_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                <StackPanel VerticalAlignment="Center" Height="64" Width="58">
+                <StackPanel VerticalAlignment="Center" Height="64" Width="66">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati" Foreground="White" Height="43" Width="76" FontSize="13"/>
+                    <Label Content="Prihvati [A]" Foreground="White" Height="43" Width="76"/>
 
                 </StackPanel>
             </Button>
 
         </Border>
-        <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="235,135,154,27">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="235,135,154,27">
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}" Width="80">
                 <StackPanel Height="66" Width="56" Margin="0,0,20,0" >
                     <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži" HorizontalContentAlignment="Center" Foreground="White" FontSize="13"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
         </Border>
-        <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="3" Margin="22,10,22,186">
+        <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="3" Margin="22,10,22,186">
             <Label Content="{Binding PatientName}"  Foreground="White" HorizontalContentAlignment="Center" FontSize="20" />
         </Border>
 

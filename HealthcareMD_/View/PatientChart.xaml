@@ -11,7 +11,7 @@
     <Window.InputBindings>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="C"
+                Key="X"
                 Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
@@ -91,7 +91,7 @@
             <Button  Margin="-1,-1,-1,-1" Foreground="Black" BorderBrush="{x:Null}" Click="OkButton_Click" RenderTransformOrigin="0.142,0.458" Background="{x:Null}">
                 <StackPanel Height="80">
                     <Image Source="/Resources/acceptWhite.png" Height="46" Width="46"/>
-                    <Label Content="Prihvati" Foreground="White"/>
+                    <Label Content="Prihvati [X]" Foreground="White" Width="97" FontSize="12"/>
                 </StackPanel>
             </Button>
         </Border>

@@ -7,10 +7,12 @@ using HealthcareMD_.DoctorView;
 using HealthcareMD_.DoctorWindows;
 using System.Windows;
 using Controller;
+using Tools;
+using System;
 
 namespace HealthcareMD_.ViewModel
 {
-    public class NewAppointmentViewModel: INotifyPropertyChanged
+    public class NewAppointmentViewModel: BindableBase, INotifyPropertyChanged
     {
 
         private int patientId;
@@ -44,6 +46,9 @@ namespace HealthcareMD_.ViewModel
                 return rooms; }
             set { rooms = roomController.getAllIds(); }
         }
+
+        
+
         private bool emergency;
         public bool Emergency { get { return emergency; } set { emergency = value; } }
 
@@ -54,18 +59,37 @@ namespace HealthcareMD_.ViewModel
         private AppointmentController apptController;
         private PatientController patientController;
         private int errorCode;
+        public MyICommand AcceptCommand { get; set; }
+        public MyICommand CloseCommand { get; set; }
+        public MyICommand PatientCommand { get; set; }
 
-        public NewAppointmentViewModel(int id,int doctorId)
+        private NewAppointment callerWindow;
+        public NewAppointmentViewModel(NewAppointment callerWindow, int id,int doctorId)
         {
             var app = Application.Current as App;
             apptController = app.appointmentController;
             roomController = app.roomController;
             patientController = app.patientController;
+            this.callerWindow = callerWindow;
+            
             this.id = id;
             this.doctorId = doctorId;
+            AcceptCommand = new MyICommand(AppointmentManagement);
+            CloseCommand = new MyICommand(Close);
+            PatientCommand = new MyICommand(PatientClick);
 
             if (id != 0) InitFields();
             
+        }
+        internal void PatientClick()
+        {
+            if (id == 0) ChoosePatient();
+            else ShowChart(id);
+        }
+
+        internal void Close()
+        {
+            callerWindow.Close();
         }
 
         private void InitFields()
@@ -103,8 +127,9 @@ namespace HealthcareMD_.ViewModel
             patientWindow.Show();
         }
 
-        public int AppointmentManagement()
-        { 
+        public void AppointmentManagement()
+        {
+            if (callerWindow.rooms_cb.SelectedIndex == -1 | callerWindow.duration_tb.Text.Equals("0") | callerWindow.date_tb.Text.Equals("")) MessageBox.Show("Nisu unete svi potrebne informacije.", "Greška");
             
             if (id == 0) errorCode=apptController.CreateAppointment(patientId,doctorId, roomId, hour, minutes, duration,date,emergency);
             else errorCode= apptController.UpdateAppointment(id, patientId,doctorId, roomId, hour, minutes, duration,date,emergency);
@@ -114,6 +139,8 @@ namespace HealthcareMD_.ViewModel
                     
                     string message = "Uspešno " + operationMessage + " pregled.";
                     MessageBox.Show(message, "Obaveštenje");
+                    callerWindow.callerWindow.RefreshAppointments();
+                    callerWindow.Close();
                     break;
                 case 1:
                     MessageBox.Show("Pacijent sa tim JMBG ne postoji.", "Greška");
@@ -122,7 +149,6 @@ namespace HealthcareMD_.ViewModel
                     MessageBox.Show("Vreme koje ste odabrali za zakazivanje termina je prošlo.", "Greška");
                     break;
             }
-            return errorCode;
 
         }
 

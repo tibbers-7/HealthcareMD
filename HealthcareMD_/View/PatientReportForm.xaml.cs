@@ -24,21 +24,19 @@ namespace HealthcareMD_.View
         public PatientReportForm(int patientId)
         {
             InitializeComponent();
-            viewModel = new ReportFormViewModel(patientId);
+            viewModel = new ReportFormViewModel(this,patientId);
             this.DataContext = viewModel;
 
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Close();
         }
 
         private void GetReport_Click(object sender, RoutedEventArgs e)
         {
-            if (startDate_tb.Text != null && endDate_tb.Text != null) viewModel.GetReport();
-            else MessageBox.Show("Niste uneli sve potrebne podatke!", "Greška");
-            this.Close();
+            viewModel.Accept();
         }
     }
 }

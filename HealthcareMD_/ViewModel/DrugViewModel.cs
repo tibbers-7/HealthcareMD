@@ -9,10 +9,11 @@ using HealthcareMD_.Controller;
 using System.Windows;
 using System.Windows.Controls;
 using HealthcareMD_.DoctorView;
+using Tools;
 
 namespace HealthcareMD_.ViewModel
 {
-    internal class DrugViewModel
+    internal class DrugViewModel : BindableBase
     {
         private int drugId;
         private string name;
@@ -26,16 +27,19 @@ namespace HealthcareMD_.ViewModel
         private ObservableCollection<string> ingredients;
         public ObservableCollection<string> Ingredients { get { return ingredients; } set { ingredients = value; } }
 
+        public MyICommand CloseCommand { get; set; }
 
         private DrugController drugController;
-        private DoctorHomeViewModel callerWindow;
+        private DrugWindow callerWindow;
 
-        public DrugViewModel(DoctorHomeViewModel callerWindow,int drugId)
+        public DrugViewModel(DrugWindow callerWindow,int drugId)
         {
             this.drugId = drugId;
             this.callerWindow=callerWindow;
             var app = Application.Current as App;
             drugController = app.drugController;
+
+            CloseCommand=new MyICommand(Close);
             Drug drug = drugController.GetById(drugId);
             ingredients = new ObservableCollection<string>(drug.Ingredients);
             name=drug.Name.ToUpper();
@@ -43,6 +47,11 @@ namespace HealthcareMD_.ViewModel
             status = drug.StatusString;
             description = drug.Description;
         
+        }
+
+        internal void Close()
+        {
+            callerWindow.Close();
         }
         
 

@@ -3,12 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:HealthcareMD_.DoctorView"
         xmlns:HealthcareMD_="clr-namespace:HealthcareMD_" xmlns:viewmodel="clr-namespace:HealthcareMD_.ViewModel" 
     d:DataContext="{d:DesignInstance Type=viewmodel:ReferralViewModel}" x:Class="HealthcareMD_.DoctorView.ReferralWindow"
         mc:Ignorable="d"
         Title="ReferralWindow" Height="452" Width="402" FontFamily="Yu Gothic">
 
+    <Window.InputBindings>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="X"
+                Command="{Binding CancelCommand}"/>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="A"
+                Command="{Binding AcceptCommand}"/>
+    </Window.InputBindings>
     <Window.Resources>
         <ControlTemplate x:Key="validationTemplate">
             <Grid Height="Auto" Width="Auto">
@@ -71,22 +82,22 @@
         <CheckBox IsChecked="{Binding Emergency}" x:Name="emergency_cb" Content="Hitno" HorizontalAlignment="Left" Margin="166,67,0,0" VerticalAlignment="Top" Height="31" Width="90" FontSize="20" RenderTransformOrigin="0.429,4.4" Grid.Row="1" Foreground="#FF345F61"/>
         <Label Content="upućuje:" HorizontalAlignment="Left" Margin="298,4,0,0" VerticalAlignment="Top" Foreground="#FF345F61"/>
         <TextBox HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding CurrentDoctor}" VerticalAlignment="Top" Width="288" Background="White" Foreground="#FF345F61"/>
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="112,103,215,10" Grid.Row="1">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="112,103,209,10" Grid.Row="1">
 
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="ScheduleButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="83" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="13"/>
+                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
 
                 </StackPanel>
             </Button>
 
         </Border>
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="222,103,102,10" Grid.Row="1">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="231,103,87,10" Grid.Row="1">
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="69" Width="89" HorizontalAlignment="Center">
                     <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži" HorizontalContentAlignment="Center" Foreground="White" FontSize="13"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
         </Border>

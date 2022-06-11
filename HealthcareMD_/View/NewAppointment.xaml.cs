@@ -5,7 +5,7 @@ namespace HealthcareMD_
 {
     public partial class NewAppointment: Window { 
         private NewAppointmentViewModel viewModel;
-        private DoctorHomeViewModel callerWindow;
+        internal DoctorHomeViewModel callerWindow;
         private int apptId;
         
 
@@ -13,10 +13,10 @@ namespace HealthcareMD_
         {
             
             InitializeComponent();
-            viewModel = new NewAppointmentViewModel(apptId, doctorId);
+            viewModel = new NewAppointmentViewModel(this,apptId, doctorId);
             if (apptId == 0)
             {
-                patientLabel.Content = "Izaberi pacijenta";
+                patientLabel.Content = "Izaberi pacijenta [P]";
                 viewModel.operationMessage = "dodat";
             }
             else patientId_tb.IsReadOnly = true;
@@ -39,24 +39,18 @@ namespace HealthcareMD_
         
         private void ScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (rooms_cb.SelectedIndex == -1 | duration_tb.Text.Equals("0") | date_tb.Text.Equals("")) MessageBox.Show("Nisu unete svi potrebne informacije.", "Greška");
-            else if (viewModel.AppointmentManagement() == 0)
-            {
-                callerWindow.RefreshAppointments();
-                this.Close();
-            }
+            viewModel.AppointmentManagement();
 
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Close();
         }
 
         private void Patient_Click(object sender, RoutedEventArgs e)
         {
-            if (apptId == 0) viewModel.ChoosePatient();
-            else viewModel.ShowChart(apptId);
+            viewModel.PatientClick();
         }
     }
 }

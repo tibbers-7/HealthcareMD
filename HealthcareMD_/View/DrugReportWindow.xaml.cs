@@ -9,12 +9,12 @@ namespace HealthcareMD_.DoctorView
     public partial class DrugReportWindow : Window
     {
         private DrugReportViewModel viewModel;
-        private DoctorHomeViewModel callerWindow;
+        public DoctorHomeViewModel callerWindow;
         private int errorCode;
 
         public DrugReportWindow(DoctorHomeViewModel callerWindow,int drugId)
         {
-            viewModel = new DrugReportViewModel(drugId);
+            viewModel = new DrugReportViewModel(this,drugId);
             this.callerWindow = callerWindow;
             this.DataContext = viewModel;
             InitializeComponent();
@@ -22,25 +22,13 @@ namespace HealthcareMD_.DoctorView
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            if (reason_tb.Text.Equals(""))
-            {
-                MessageBox.Show("Niste uneli sve potrebne podatke!", "Greška");
-            }
-            else
-            {
-                errorCode = viewModel.CreateDrugReport();
-                if (errorCode == 0)
-                {
-                    callerWindow.RefreshDrugs();
-                    this.Close();
-                }
-            }
+            viewModel.CreateDrugReport();
             
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Close();
         }
     }
 }
