@@ -9,8 +9,6 @@
       "HealthcareMD/1.0.0": {
         "dependencies": {
           "OxyPlot.Wpf": "2.1.0",
-          "Syncfusion.SfChart.WPF": "20.1.0.59",
-          "System.Windows.Interactivity.WPF": "2.0.20525",
           "itext7": "7.2.2"
         },
         "runtime": {
@@ -328,25 +326,6 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
-      "Syncfusion.Licensing/20.1.0.59": {
-        "runtime": {
-          "lib/net6.0/Syncfusion.Licensing.dll": {
-            "assemblyVersion": "20.1.0.59",
-            "fileVersion": "20.1.0.59"
-          }
-        }
-      },
-      "Syncfusion.SfChart.WPF/20.1.0.59": {
-        "dependencies": {
-          "Syncfusion.Licensing": "20.1.0.59"
-        },
-        "runtime": {
-          "lib/net5.0-windows7.0/Syncfusion.SfChart.WPF.dll": {
-            "assemblyVersion": "20.1500.0.59",
-            "fileVersion": "20.1500.0.59"
-          }
-        }
-      },
       "System.AppContext/4.1.0": {
         "dependencies": {
           "System.Runtime": "4.3.1"
@@ -793,18 +772,6 @@
           "System.Runtime.Handles": "4.3.0"
         }
       },
-      "System.Windows.Interactivity.WPF/2.0.20525": {
-        "runtime": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "2.0.20525.0"
-          },
-          "lib/net40/System.Windows.Interactivity.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "2.0.20525.0"
-          }
-        }
-      },
       "System.Xml.ReaderWriter/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1099,20 +1066,6 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
-    },
-    "Syncfusion.Licensing/20.1.0.59": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-W8SzUDmLaX8Ivs9f7FYbxJGNkbjrYxjVOB3+dzQtk8UfhPwH3K8zD2WhNE61WRpB9ecTfe9YAmk2KnfapbOdEw==",
-      "path": "syncfusion.licensing/20.1.0.59",
-      "hashPath": "syncfusion.licensing.20.1.0.59.nupkg.sha512"
-    },
-    "Syncfusion.SfChart.WPF/20.1.0.59": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1+oztQsQHH7S2xXsk9H26HKtCszplG8KO1JxmvvvMKvI7ejbYTiGbbxaolGLvU7T4kSEgCdJfdGsgjUQqOtHGg==",
-      "path": "syncfusion.sfchart.wpf/20.1.0.59",
-      "hashPath": "syncfusion.sfchart.wpf.20.1.0.59.nupkg.sha512"
     },
     "System.AppContext/4.1.0": {
       "type": "package",
@@ -1442,13 +1395,6 @@
       "sha512": "sha512-k/+g4b7vjdd4aix83sTgC9VG6oXYKAktSfNIJUNGxPEj7ryEOfzHHhfnmsZvjxawwcD9HyWXKCXmPjX8U4zeSw==",
       "path": "system.threading.threadpool/4.3.0",
       "hashPath": "system.threading.threadpool.4.3.0.nupkg.sha512"
-    },
-    "System.Windows.Interactivity.WPF/2.0.20525": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
-      "path": "system.windows.interactivity.wpf/2.0.20525",
-      "hashPath": "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
     },
     "System.Xml.ReaderWriter/4.3.0": {
       "type": "package",

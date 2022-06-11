@@ -7,10 +7,11 @@ using System.Windows;
 using HealthcareMD.Controller;
 using HealthcareMD.DoctorView;
 using HealthcareMD.DoctorWindows;
+using Tools;
 
 namespace HealthcareMD.ViewModel
 {
-    public class PatientChartViewModel
+    public class PatientChartViewModel : BindableBase 
     {
         private PatientController patientController;
         private AppointmentController appointmentController;
@@ -37,19 +38,28 @@ namespace HealthcareMD.ViewModel
         private ObservableCollection<Prescription> prescriptions;
         private DrugController drugController;
         private PatientChart callerWindow;
-        
+        public MyICommand AcceptCommand { get; set; }
 
-        public PatientChartViewModel(int patientId)
+
+
+        public PatientChartViewModel(PatientChart callerWindow,int patientId)
         {
             var app = Application.Current as App;
             appointmentController = app.appointmentController;
             drugController = app.drugController;
             patientController = app.patientController;
+            this.callerWindow = callerWindow;
+            AcceptCommand=new MyICommand(Accept);
 
             Patient p=patientController.GetById(patientId);
             if (p == null) return;
             InitFields(p);
                 
+        }
+
+        internal void Accept()
+        {
+            callerWindow.Close();
         }
         private void InitFields(Patient p)
         {

@@ -11,7 +11,7 @@ namespace HealthcareMD.DoctorWindows
 
         public PatientChart(int patientId)
         {
-            viewModel = new PatientChartViewModel(patientId);
+            viewModel = new PatientChartViewModel(this,patientId);
             this.DataContext = viewModel;
             InitializeComponent();
             InitFields();
@@ -60,7 +60,7 @@ namespace HealthcareMD.DoctorWindows
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Accept();
         }
 
         private void Report_DoubleClick(object sender, RoutedEventArgs e)

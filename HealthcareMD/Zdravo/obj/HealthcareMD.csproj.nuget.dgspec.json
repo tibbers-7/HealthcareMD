@@ -44,14 +44,6 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
-            "Syncfusion.SfChart.WPF": {
-              "target": "Package",
-              "version": "[20.1.0.59, )"
-            },
-            "System.Windows.Interactivity.WPF": {
-              "target": "Package",
-              "version": "[2.0.20525, )"
-            },
             "itext7": {
               "target": "Package",
               "version": "[7.2.2, )"

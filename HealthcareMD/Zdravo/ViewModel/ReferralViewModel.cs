@@ -10,10 +10,11 @@ using System.Windows;
 using HealthcareMD.Controller;
 using HealthcareMD.DoctorView;
 using HealthcareMD.DoctorWindows;
+using Tools;
 
 namespace HealthcareMD.ViewModel
 {
-    internal class ReferralViewModel: INotifyPropertyChanged
+    internal class ReferralViewModel: BindableBase, INotifyPropertyChanged
     {
         private int patientId;
         public int PatientId { get { return patientId; } set { patientId = value; } }
@@ -26,6 +27,12 @@ namespace HealthcareMD.ViewModel
         private bool emergency;
         public bool Emergency { get { return emergency; } set { emergency = value; } }
         private string doctorSpecialization;
+
+        internal void Cancel()
+        {
+            callerWindow.Close();
+        }
+
         public string DoctorSpecialization { get { return doctorSpecialization; } set { doctorSpecialization = value; } }
         private int doctorId;
         private string currentDoctor;
@@ -33,14 +40,19 @@ namespace HealthcareMD.ViewModel
         
         private AppointmentController apptController;
         private int errorCode;
-
-        public ReferralViewModel(int doctorId)
+        public MyICommand CancelCommand;
+        public MyICommand AcceptCommand;
+        private ReferralWindow callerWindow;
+        public ReferralViewModel(ReferralWindow callerWindow,int doctorId)
         {
             this.doctorId=doctorId;
             var app = Application.Current as App;
             apptController = app.appointmentController;
             specializations = apptController.GetAllSpetializations();
             currentDoctor = apptController.GetDoctorInfo(doctorId);
+            this.callerWindow = callerWindow;
+            AcceptCommand = new MyICommand(ScheduleReferral);
+            CancelCommand=new MyICommand(Cancel);
 
         }
 
@@ -50,13 +62,16 @@ namespace HealthcareMD.ViewModel
             choosePatient.Show();
         }
 
-        internal int ScheduleReferral()
+        internal void ScheduleReferral()
         {
-            errorCode= apptController.CreateReferral(patientId,doctorId, doctorSpecialization, appt,emergency);
+            if (callerWindow.surgery_rb.IsChecked == false && callerWindow.appt_tb.IsChecked == false) MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška");
+            
+            errorCode = apptController.CreateReferral(patientId,doctorId, doctorSpecialization, appt,emergency);
             switch (errorCode)
             {
                 case 0:
                     MessageBox.Show("Uspešno kreiran uput", "Obaveštenje");
+                    callerWindow.Close();
                     break;
                 case 1:
                     MessageBox.Show("Pacijent ne postoji!", "Greška");
@@ -68,7 +83,6 @@ namespace HealthcareMD.ViewModel
                     MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška");
                     break;
             }
-            return errorCode;
 
         }
 

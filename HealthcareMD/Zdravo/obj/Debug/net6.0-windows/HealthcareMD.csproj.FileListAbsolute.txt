@@ -1,7 +1,6 @@
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.exe
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.deps.json
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.runtimeconfig.json
-C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.dll
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.pdb
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\itext.barcodes.dll
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\itext.forms.dll
@@ -26,10 +25,6 @@ C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-window
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\OxyPlot.Wpf.dll
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\OxyPlot.Wpf.Shared.dll
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
-C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\Syncfusion.Licensing.dll
-C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\Syncfusion.SfChart.WPF.dll
-C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\Microsoft.Expression.Interactions.dll
-C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\HealthcareMD.csproj.AssemblyReference.cache
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\DoctorHome.g.cs
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\MainWindow.g.cs
@@ -72,3 +67,4 @@ C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-window
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\HealthcareMD.pdb
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\HealthcareMD.genruntimeconfig.cache
 C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\obj\Debug\net6.0-windows\ref\HealthcareMD.dll
+C:\Users\Anja\Documents\HealthcareMD\HealthcareMD\Zdravo\bin\Debug\net6.0-windows\HealthcareMD.dll

@@ -11,7 +11,7 @@
     <Window.InputBindings>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="Space"
+                Key="C"
                 Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
@@ -69,15 +69,15 @@
                 <Label Content="Status" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,-3,0,0" Foreground="White"/>
             </Border>
             <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="204,305,207,10">
-                
-                    <Button x:Name="Accept" Margin="-1,-1,-1,-1" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                    <StackPanel Height="70" Width="77">
-                        <Image Source="/Resources/acceptWhite.png" Height="44" Width="58" Margin="0,0,20,0"/>
-                        <Label Content="Prihvati" Foreground="White" Margin="0,0,20,0" Width="72"/>
+
+                <Button x:Name="Accept" Margin="-1,-1,-1,-1" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                    <StackPanel Height="70" Width="87">
+                        <Image Source="/Resources/acceptWhite.png" Height="38" Width="48" Margin="0,0,30,0"/>
+                        <Label Content="Prihvati [C]" Foreground="White" Width="73" FontSize="12" Margin="0,0,20,0"/>
 
                     </StackPanel>
-                    </Button>
-                
+                </Button>
+
             </Border>
             <TextBox HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" IsReadOnly="True" HorizontalContentAlignment="Center" Text="{Binding CurrentDoctor}" BorderThickness="2"  VerticalAlignment="Top" Width="288" Background="White" Foreground="#FF345F61" BorderBrush="#FF4C7F82"/>
 

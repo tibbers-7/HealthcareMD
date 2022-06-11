@@ -21,7 +21,7 @@ namespace HealthcareMD.DoctorView
         private ReferralViewModel viewModel;
         public ReferralWindow(int doctorId)
         {
-            viewModel = new ReferralViewModel(doctorId);
+            viewModel = new ReferralViewModel(this,doctorId);
             this.DataContext = viewModel;
             InitializeComponent();
             
@@ -29,8 +29,7 @@ namespace HealthcareMD.DoctorView
 
         private void ScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (surgery_rb.IsChecked == false && appt_tb.IsChecked == false) MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška"); 
-            else if(viewModel.ScheduleReferral()==0) this.Close();
+            viewModel.ScheduleReferral();
 
         }
 
@@ -41,7 +40,7 @@ namespace HealthcareMD.DoctorView
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Cancel();
         }
     }
 
