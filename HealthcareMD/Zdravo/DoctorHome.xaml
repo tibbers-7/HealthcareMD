@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
-        xmlns:local="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel" xmlns:Tools="clr-namespace:HealthcareMD.Tools" d:DataContext="{d:DesignInstance Type=viewmodel:DoctorHomeViewModel}"
+        xmlns:local="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel"
+         d:DataContext="{d:DesignInstance Type=viewmodel:DoctorHomeViewModel}"
+        
         mc:Ignorable="d" 
         Title="DoctorHome" Height="580" Width="1042" d:DesignHeight="580" d:DesignWidth="1042" FontSize="13" FontFamily="Yu Gothic" >
 
     <Window.Resources>
-        <Tools:ImageConverter x:Key="ImageConverter"/>
         <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -109,8 +110,8 @@
                     <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="10,10,327,449">
                         <Label Content="Dobrodošli!" Foreground="White" FontSize="40" Margin="171,0,191,0"/>
                     </Border>
-                    <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="10,103,725,359">
-                        <Label Content="Današnji pregledi" Margin="0,-3,0,3"/>
+                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8,8,0,0" Margin="10,103,725,359">
+                        <Label Content="Današnji pregledi" Margin="0,-3,0,3" Foreground="White"/>
                     </Border>
                     <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="10,147,703,211">
                         <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding TodaysAppointments}" FontSize="15" >
@@ -128,8 +129,8 @@
                             </ListView.View>
                         </ListView>
                     </Border>
-                    <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="250,106,517,356">
-                        <Label Content="Odmori" Margin="0,-3,0,3"/>
+                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8,8,0,0" Margin="250,106,565,356">
+                        <Label Content="Odmori" Margin="0,-3,0,3" Foreground="White"/>
                     </Border>
                     <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="250,150,327,211">
                         <ListView ItemsSource="{Binding UpcomingVacations}" FontSize="15">
@@ -141,13 +142,9 @@
                             </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Period" Width="240" DisplayMemberBinding="{Binding Period}"/>
-                                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Image}">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Source="{Binding Status, Converter={StaticResource ImageConverter}}"/>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
+                                    <GridViewColumn Header="Period" Width="200" DisplayMemberBinding="{Binding Period}"/>
+                                    <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding StatusView}">
+                                        
                                     </GridViewColumn>
 
                                 </GridView>
@@ -157,8 +154,9 @@
                            
                         </ListView>
                     </Border>
-                    <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="54,344,327,10" />
+                    <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="10,344,327,10" />
 
+                    <Border BorderBrush="#70ABAF" BorderThickness="5" CornerRadius="8" Margin="10,339,327,10"/>
 
                 </Grid>
             </TabItem>

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using HealthcareMD.ViewModel;
+using Model;
 
 namespace HealthcareMD.DoctorWindows
 {
@@ -62,17 +63,18 @@ namespace HealthcareMD.DoctorWindows
             this.Close();
         }
 
-
-        private void ReportRow_DoubleClick(object sender, RoutedEventArgs e)
+        private void Report_DoubleClick(object sender, RoutedEventArgs e)
         {
-            object item = reportTable.SelectedItem;
-            viewModel.ShowReport(int.Parse((reportTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
+            ListViewItem item = sender as ListViewItem;
+            Report report = (Report)item.Content;
+            viewModel.ShowReport(report.Id);
         }
 
-        private void DrugRow_DoubleClick(object sender, RoutedEventArgs e)
+        private void Prescription_DoubleClick(object sender, RoutedEventArgs e)
         {
-            object item = prescTable.SelectedItem;
-            viewModel.ShowDrug(int.Parse((prescTable.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text));
+            ListViewItem item = sender as ListViewItem;
+            Prescription prescription = (Prescription)item.Content;
+            viewModel.ShowDrug(prescription.DrugId);
         }
 
     }

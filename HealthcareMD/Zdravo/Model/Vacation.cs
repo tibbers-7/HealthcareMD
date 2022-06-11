@@ -21,6 +21,8 @@ namespace Model
         public VacationStatus Status { get { return status; } set { status = value; } }
         private string statusString;
         public string StatusString { get { return statusString; } set { statusString = value; } }
+        private string statusView;
+        public string StatusView { get { return statusView; } set { statusView = value; } }
     }
     public class Vacation
     {
@@ -99,14 +101,17 @@ namespace Model
                     case HealthcareMD.Status.accepted:
                         vacString.Status = HealthcareMD.VacationStatus.accepted;
                         vacString.StatusString = "ODOBRENO";
+                        vacString.StatusView = vacString.StatusString;
                         break;
                     case HealthcareMD.Status.denied:
                         vacString.Status = HealthcareMD.VacationStatus.denied;
                         vacString.StatusString = "ODBIJENO;\n" + deniedReason;
+                        vacString.StatusView = "ODBIJENO";
                         break;
                     default:
                         vacString.Status = HealthcareMD.VacationStatus.waiting;
                         vacString.StatusString = "NA ČEKANJU";
+                    vacString.StatusView = "ČEKA";
                         break;
                 }
             int cmp = DateTime.Compare(endDate.ToDateTime(TimeOnly.Parse("00:00 AM")), DateTime.Now);

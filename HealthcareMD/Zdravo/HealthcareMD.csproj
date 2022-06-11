@@ -27,6 +27,7 @@
     <None Remove="Resources\doctor.jpg" />
     <None Remove="Resources\hospital.png" />
     <None Remove="Resources\logout_white.png" />
+    <None Remove="Resources\patientWhite.png" />
     <None Remove="Resources\reportInvalid.png" />
   </ItemGroup>
 
@@ -115,6 +116,7 @@
     <Resource Include="Resources\newApptWhite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\patientWhite.png" />
     <Resource Include="Resources\referral.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

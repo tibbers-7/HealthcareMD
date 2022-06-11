@@ -90,33 +90,39 @@
 
         <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="12,367,274,197" Grid.Column="1"/>
         <Label Content="Izveštaji" Margin="20,368,262,184" FontSize="20" Grid.Column="1"/>
-        <DataGrid x:Name="reportTable" ItemsSource="{Binding Reports, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly ="True"  SelectionMode="Single" ColumnWidth="*" Background="#FFF0F7F4" Margin="10,402,205,106" Grid.Column="1" BorderBrush="#FF70ABAF">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <EventSetter Event="Control.MouseDoubleClick" Handler="ReportRow_DoubleClick"/>
+
+        <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding Reports}" Margin="12,408,199,106" Grid.Column="1" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="Report_DoubleClick" />
                 </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" MaxWidth="0"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="2*"/>
-                <DataGridTextColumn Header="Dijagnoza" Binding="{Binding Diagnosis}" Width="1.5*" />
-            </DataGrid.Columns>
-        </DataGrid>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Datum" Width="100" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Dijagnoza" Width="82" DisplayMemberBinding="{Binding Diagnosis}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="210,370,76,184" Grid.Column="1"/>
         <Label Content="Recepti" Margin="215,368,76,184" FontSize="20" Grid.Column="1"/>
-        <DataGrid x:Name="prescTable" ItemsSource="{Binding Prescriptions, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"  IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="#FFF0F7F4" Margin="209,402,37,106" Grid.Column="1" BorderBrush="#FF70ABAF">
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <EventSetter Event="Control.MouseDoubleClick" Handler="DrugRow_DoubleClick"/>
+
+        <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding Prescriptions}" Margin="211,407,37,107" Grid.Column="1" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="Prescription_DoubleClick" />
                 </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" MaxWidth="0"/>
-                <DataGridTextColumn Header="Lek" Binding="{Binding DrugId}"  />
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}"  />
-            </DataGrid.Columns>
-        </DataGrid>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Lek" Width="50" DisplayMemberBinding="{Binding DrugId}"/>
+                    <GridViewColumn Header="Datum" Width="100" DisplayMemberBinding="{Binding Date}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
 

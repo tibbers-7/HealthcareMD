@@ -16,7 +16,7 @@ namespace HealthcareMD
             viewModel = new NewAppointmentViewModel(apptId, doctorId);
             if (apptId == 0)
             {
-                patientButton.Content = "Izaberi pacijenta";
+                patientLabel.Content = "Izaberi pacijenta";
                 viewModel.operationMessage = "dodat";
             }
             else patientId_tb.IsReadOnly = true;

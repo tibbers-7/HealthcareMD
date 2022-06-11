@@ -15,11 +15,11 @@ namespace HealthcareMD.Tools
             switch (statusString)
             {
                 case "waiting":
-                    return "\\Resources\\waitGreypng";
+                    return "\\Resources\\waitGrey.png";
                 case "accepted":
-                    return "C:\\TEMP\\two_stars.png";
+                    return "\\Resources\\waitGrey.png";
                 default:
-                    return "C:\\TEMP\\no_stars.png";
+                    return "\\Resources\\waitGrey.png";
             }
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
