@@ -1,0 +1,67 @@
+﻿<Window x:Class="HealthcareMD_.DoctorView.ChoosePatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthcareMD_.DoctorView"
+         xmlns:viewmodel="clr-namespace:HealthcareMD_.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ChoosePatientViewModel}"
+        mc:Ignorable="d"
+        Title="ChoosePatient" Height="391" Width="306" FontFamily="Yu Gothic" Background="#FFCBF4E7">
+
+    <Window.InputBindings>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="X"
+                Command="{Binding CloseCommand}"/>
+    </Window.InputBindings>
+
+    <Grid  Margin="0,10,0,-6">
+
+
+        <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,0,10,85" Background="#FF99E1D9">
+            <DataGrid x:Name="patientTable" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="{x:Null}" Margin="6,6,6,6" GridLinesVisibility="Horizontal" BorderBrush="{x:Null}">
+                <DataGrid.InputBindings>
+                    <KeyBinding 
+                        Modifiers="Control" 
+                        Key="A"
+                        Command="{Binding AcceptCommand}"/>
+                    <KeyBinding 
+                        Modifiers="Control" 
+                        Key="Space"
+                        Command="{Binding ShowCommand}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="JMBG" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Ime" Binding="{Binding Ime}"/>
+                    <DataGridTextColumn Header="Prezime" Binding="{Binding Prezime}"  />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="70,268,162,10">
+
+            <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="83" Width="75">
+                    <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
+                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
+
+                </StackPanel>
+            </Button>
+
+        </Border>
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="172,268,57,10">
+            <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="59" Width="88" HorizontalAlignment="Center">
+                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+        </Border>
+
+    </Grid>
+</Window>

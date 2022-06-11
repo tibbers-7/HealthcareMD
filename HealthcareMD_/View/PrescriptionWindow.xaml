@@ -1,0 +1,92 @@
+﻿<Window x:Class="HealthcareMD_.DoctorWindows.PrescriptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HealthcareMD_.DoctorWindows"
+        mc:Ignorable="d"
+        Title="Recept" Height="391" Width="306" FontFamily="Yu Gothic">
+
+    <Window.InputBindings>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="X"
+                Command="{Binding CloseCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <DataTemplate x:Key="highlightRow">
+            <TextBlock Text="{Binding MyProperty}"/>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=isAllergic}">
+                    <DataTrigger.Value>
+                        true
+                    </DataTrigger.Value>
+                    <DataTrigger.Setters>
+                        <Setter Property="ListBox.Foreground" Value="Red"/>
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <Grid Background="#FFCBF4E7">
+        <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,10,10,85" Background="#FF99E1D9">
+            <DataGrid x:Name="drugTable" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Drugs, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="{x:Null}" Margin="6,10,6,6" GridLinesVisibility="Horizontal" BorderBrush="{x:Null}" Foreground="#FF345F61">
+                <DataGrid.InputBindings>
+                    <KeyBinding 
+                        Modifiers="Control" 
+                        Key="A"
+                        Command="{Binding AcceptCommand}"/>
+                    <KeyBinding 
+                        Modifiers="Control" 
+                        Key="Space"
+                        Command="{Binding ShowCommand}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="Control.MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+
+                </DataGrid.Resources>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAllergic}" Value="true">
+                                <Setter Property="Background" Value="#FFF33C3C"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" MaxWidth="0" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Ime" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Tip" Binding="{Binding Type}"  />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="70,272,165,10">
+
+            <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="83" Width="75">
+                    <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
+                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
+
+                </StackPanel>
+            </Button>
+
+        </Border>
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="172,272,64,10">
+            <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <StackPanel Height="59" Width="88" HorizontalAlignment="Center">
+                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+        </Border>
+
+    </Grid>
+</Window>
