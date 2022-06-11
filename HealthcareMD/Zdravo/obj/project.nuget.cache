@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rqgNH1yLE4cp4+C6gcIHmwMk9VUN26Cu6asNl/QoFi4yXUChKsHDAEdU5s3IsNkMCxOIkyq9HV9RQ9J7DF1p3g==",
+  "dgSpecHash": "M5O4ewKIgQZxufNXfMa49iTDoUU8wgbFHaO9Uzpz4GQtKqqtB9BHT+p/7YVJXiKrVYJfx5ba007HnHpZ5skPEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Anja\\Documents\\HealthcareMD\\HealthcareMD\\Zdravo\\HealthcareMD.csproj",
   "expectedPackageFiles": [
@@ -87,9 +87,21 @@
     "C:\\Users\\Anja\\.nuget\\packages\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\system.threading.thread\\4.3.0\\system.threading.thread.4.3.0.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\system.threading.threadpool\\4.3.0\\system.threading.threadpool.4.3.0.nupkg.sha512",
+    "C:\\Users\\Anja\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
     "C:\\Users\\Anja\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "System.Windows.Interactivity.WPF",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }

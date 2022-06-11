@@ -66,7 +66,18 @@ namespace HealthcareMD.ViewModel
                     errorCode=appointmentController.UpdateReport(patientId,reportId, date, diagnosis, reportString,anamnesis);
                     break;
             }
-            if (errorCode == -1) MessageBox.Show("Neuspešan upis u fajl!", "Interna greška");
+            switch (errorCode)
+            {
+                case -1:
+                    MessageBox.Show("Neuspešan upis u fajl!", "Interna greška");
+                    break;
+                case 1:
+                    MessageBox.Show("Pregled ne postoji u bazi!", "Interna greška");
+                    break;
+                case 2:
+                    MessageBox.Show("Pacijent ne postoji u bazi!", "Interna greška");
+                    break;
+            }
             
         }
     }

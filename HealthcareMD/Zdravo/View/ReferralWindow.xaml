@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:HealthcareMD.DoctorView"
         xmlns:HealthcareMD="clr-namespace:HealthcareMD" xmlns:viewmodel="clr-namespace:HealthcareMD.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ReferralViewModel}" x:Class="HealthcareMD.DoctorView.ReferralWindow"
         mc:Ignorable="d"

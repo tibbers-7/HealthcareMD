@@ -35,7 +35,7 @@ namespace HealthcareMD.Service
         {
             if (appt == null) return 1;
             errorCode =AddReport(report);
-            if (errorCode == 0) patientRepo.AddReport(appt.Patient, report);
+            if (errorCode == 0) errorCode=patientRepo.AddReport(appt.Patient, report);
             return errorCode;
         }
 

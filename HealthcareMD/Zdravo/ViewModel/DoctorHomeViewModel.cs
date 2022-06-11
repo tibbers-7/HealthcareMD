@@ -17,10 +17,11 @@ using OxyPlot.Legends;
 using OxyPlot.Series;
 using OxyPlot.Axes;
 using System.Windows.Media;
+using Tools;
 
 namespace HealthcareMD.ViewModel
 {
-    public class DoctorHomeViewModel : INotifyPropertyChanged
+    public class DoctorHomeViewModel : BindableBase, INotifyPropertyChanged
     {
         AppointmentController appointmentController;
         VacationController vacationController;
@@ -33,6 +34,8 @@ namespace HealthcareMD.ViewModel
         private ObservableCollection<VacationString> upcomingVacations;
         private ObservableCollection<Drug> drugs;
         private ObservableCollection<Patient> patients;
+        private DoctorHome doctorHome;
+        
         
         private int doctorId;
         private string date;
@@ -60,26 +63,17 @@ namespace HealthcareMD.ViewModel
         public string DoctorProfession { get { return doctorProfession; } set { doctorProfession = value; } }
 
         private List<AppointmentData> data;
-        public List<AppointmentData> Data {
-            get
-            {
-                return data;
-            }
-            set
-            {
-                if (data == value)
-                    return;
-                data = appointmentController.GetAppointmentData(doctorId);
-                NotifyPropertyChanged("Data");
-            }
-        }
+        public object selectedAppt;
+        public object selectedVacation;
+        
 
         private List<BarItem> barItems;
         private BarSeries barSeries;
         private string[] categorySource;
         private CategoryAxis categoryAxis;
 
-        public DoctorHomeViewModel(int doctorId)
+
+        public DoctorHomeViewModel(DoctorHome doctorHome,int doctorId)
         {
             var app = Application.Current as App;
             appointmentController = app.appointmentController;
@@ -87,21 +81,27 @@ namespace HealthcareMD.ViewModel
             vacationController=app.vacationController;
             patientController=app.patientController;
             this.doctorId=doctorId;
+            this.doctorHome=doctorHome;
+
+            InitFields();
+            InitOxyChart();
+            InitInteractivity();
+            
+
+        }
+
+        private void InitFields()
+        {
             upcomingAppointments = new ObservableCollection<Appointment>(appointmentController.GetUpcomingAppointmentsForDoctor(doctorId));
             passedAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             todaysAppointments = new ObservableCollection<Appointment>(appointmentController.GetTodaysAppointments(doctorId));
             upcomingVacations = new ObservableCollection<VacationString>(vacationController.GetUpcomingVacations(doctorId));
-            drugs=new ObservableCollection<Drug>(drugController.GetValidDrugs());
-            vacations= new ObservableCollection<VacationString>(vacationController.GetDoctorVacationStrings(doctorId));
+            drugs = new ObservableCollection<Drug>(drugController.GetValidDrugs());
+            vacations = new ObservableCollection<VacationString>(vacationController.GetDoctorVacationStrings(doctorId));
             patients = new ObservableCollection<Patient>(patientController.GetAll());
             doctorName = appointmentController.GetDoctorName(doctorId);
             doctorProfession = appointmentController.GetDoctorProfession(doctorId);
             data = appointmentController.GetAppointmentData(doctorId);
-            
-            InitOxyChart();
-
-            
-
         }
 
         private void InitOxyChart()
@@ -113,6 +113,25 @@ namespace HealthcareMD.ViewModel
             model.Axes.Add(categoryAxis);
         }
 
+        private void InitInteractivity()
+        {
+            NewAppointmentCommand = new MyICommand(NewAppointment);
+            ReferralCommand = new MyICommand(ShowReferral);
+            ShowCommand = new MyICommand(Show);
+            UpdateCommand = new MyICommand(UpdateAppointment);
+            DeleteCommand = new MyICommand(DeleteAppt);
+            ReportCommand = new MyICommand(Report);
+            PrescCommand = new MyICommand(PrescriptionShow);
+            DrugReportCommand = new MyICommand(ReportDrug);
+        }
+
+        private void Report()
+        {
+            if (doctorHome.PassedTable.SelectedItem != null) ReportShow(int.Parse((doctorHome.PassedTable.SelectedCells[0].Column.GetCellContent(doctorHome.PassedTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.PatientTable.SelectedItem != null) PatientReportForm();
+
+
+        }
         private void GetDataForChart()
         {
             barItems = new List<BarItem>();
@@ -139,6 +158,27 @@ namespace HealthcareMD.ViewModel
             };
         }
 
+        private void Show()
+        {
+            if (doctorHome.PassedTable.SelectedItem != null) AppointmentShow(int.Parse((doctorHome.PassedTable.SelectedCells[0].Column.GetCellContent(doctorHome.PassedTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.UpcomingTable.SelectedItem != null) AppointmentShow(int.Parse((doctorHome.UpcomingTable.SelectedCells[0].Column.GetCellContent(doctorHome.UpcomingTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.VacationTable.SelectedItem != null) VacationShow(int.Parse((doctorHome.VacationTable.SelectedCells[0].Column.GetCellContent(doctorHome.VacationTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.DrugsTable.SelectedItem != null) DrugShow(int.Parse((doctorHome.DrugsTable.SelectedCells[0].Column.GetCellContent(doctorHome.DrugsTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.PatientTable.SelectedItem != null) PatientShow(int.Parse((doctorHome.PatientTable.SelectedCells[0].Column.GetCellContent(doctorHome.PatientTable.SelectedItem) as TextBlock).Text));
+            else if (doctorHome.TodaysApptsList.SelectedItem!=null)
+            {
+                Appointment appt = doctorHome.TodaysApptsList.SelectedItem as Appointment;
+                AppointmentShow(appt.Id);
+            }
+            else if (doctorHome.VacationsList.SelectedItem != null)
+            {
+                VacationString vacation= doctorHome.VacationsList.SelectedItem as VacationString;
+                VacationShow(vacation.Id);
+            }
+
+        }
+
+
         internal void VacationShow(int vacationId)
         {
             VacationWindow vacationWindow=new VacationWindow(vacationId);
@@ -164,6 +204,7 @@ namespace HealthcareMD.ViewModel
 
         internal void AppointmentShow(int id)
         {
+            
             NewAppointment updateAppointment = new NewAppointment(this, id, doctorId,false);
             updateAppointment.Show();
         }
@@ -173,16 +214,23 @@ namespace HealthcareMD.ViewModel
             UpcomingAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             PassedAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             Data = appointmentController.GetAppointmentData(doctorId);
-            //model.InvalidatePlot(true);
+            
             InitOxyChart();
             Model.InvalidatePlot(true);
             
         }
 
-        internal void ReportDrug(int drugId)
+        internal void ReportDrug()
         {
-            DrugReportWindow drugReportWindow = new DrugReportWindow(this, drugId);
-            drugReportWindow.Show();
+            object item =doctorHome.DrugsTable.SelectedItem;
+            if (item != null)
+            {
+                int id = int.Parse((doctorHome.DrugsTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+                DrugReportWindow drugReportWindow = new DrugReportWindow(this, id);
+                drugReportWindow.Show();
+            }
+            else MessageBox.Show("Niste odabrali pregled!");
+            
         }
 
         public void RefreshDrugs()
@@ -194,10 +242,24 @@ namespace HealthcareMD.ViewModel
         {
             Vacations = new ObservableCollection<VacationString>(vacationController.GetDoctorVacationStrings(doctorId));
         }
-        internal void PrescriptionShow(int id)
+        internal void PrescriptionShow()
         {
-            PrescriptionWindow prescriptionWindow = new PrescriptionWindow(id);
-            prescriptionWindow.Show();
+            object item = doctorHome.PassedTable.SelectedItem;
+            if (item != null)
+            {
+                int id = int.Parse((doctorHome.PassedTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+                Appointment appt=appointmentController.GetById(id);
+                Patient patient=patientController.GetById(appt.Patient);
+                if (patient != null)
+                {
+                    PrescriptionWindow prescriptionWindow = new PrescriptionWindow(id);
+                    prescriptionWindow.Show();
+                }
+                else MessageBox.Show("Pacijent ne postoji u bazi!!","Interna greška");
+
+            }
+            else MessageBox.Show("Niste odabrali pregled!");
+            
         }
 
         public void NewAppointment()
@@ -206,20 +268,38 @@ namespace HealthcareMD.ViewModel
             newAppointment.Show();
         }
 
-        internal void PatientReportForm(int patientId)
+        internal void PatientReportForm()
         {
-            PatientReportForm patientReportForm = new PatientReportForm(patientId);
-            patientReportForm.Show();
+            object item = doctorHome.PatientTable.SelectedItem;
+            if (item != null)
+            {
+                int id=int.Parse((doctorHome.PatientTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+                PatientReportForm patientReportForm = new PatientReportForm(id);
+                patientReportForm.Show();
+            }
+            else MessageBox.Show("Niste odabrali pacijenta!");
+            
         }
 
-        internal void UpdateAppointment(int id)
+        internal void UpdateAppointment()
         {
-            NewAppointment updateAppointment = new NewAppointment(this, id, doctorId,true);
-            updateAppointment.Show();
+            object item = doctorHome.UpcomingTable.SelectedItem;
+            if (item != null)
+            {
+                int id = int.Parse((doctorHome.UpcomingTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+                NewAppointment updateAppointment = new NewAppointment(this, id, doctorId, true);
+                updateAppointment.Show();
+
+            }
+            else MessageBox.Show("Niste odabrali pregled!");
+            
         }
 
-        internal int ScheduleVacation(bool emergency)
+        internal int ScheduleVacation()
         {
+            if (doctorHome.vacationRadio.IsChecked == false && doctorHome.sickLeaveRadio.IsChecked == false) MessageBox.Show("Niste uneli sve potrebne podatke.", "Greška");
+            else if (doctorHome.startDate_tb.Text.Equals("") | doctorHome.endDate_tb.Text.Equals("") | doctorHome.reason_tb.Text.Equals("")) MessageBox.Show("Niste uneli sve potrebne podatke.", "Greška");
+            bool emergency=(bool)doctorHome.emergency_Check.IsChecked;
             int error=vacationController.ScheduleVacation(doctorId,startDate,endDate,reason, emergency);
             RefreshVacations();
             switch (error)
@@ -254,7 +334,33 @@ namespace HealthcareMD.ViewModel
             reportWindow.Show();
         }
 
-        internal void DeleteAppt(int id)
+        internal void DeleteAppt()
+        {
+            object item = doctorHome.UpcomingTable.SelectedItem;
+            int id;
+            if (item != null)
+                id = int.Parse((doctorHome.UpcomingTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+            else
+            {
+                MessageBox.Show("Niste odabrali pregled!");
+                return;
+            }
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da obrišete ovaj pregled?", "Upozorenje", button);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Delete(id);
+                    break;
+                case MessageBoxResult.No:
+                    return;
+            }
+           
+            
+        }
+
+        private void Delete(int id)
         {
             errorCode = appointmentController.DeleteAppointment(id);
             switch (errorCode)
@@ -273,10 +379,13 @@ namespace HealthcareMD.ViewModel
                     MessageBox.Show("Neuspešan upis u datoteku!", "Interna greška");
                     break;
             }
-            
         }
 
 
+
+
+
+        // PROPERTYCHANGED PUBLIC FIELDS
         public ObservableCollection<Appointment> UpcomingAppointments
         {
             get
@@ -381,6 +490,20 @@ namespace HealthcareMD.ViewModel
                 NotifyPropertyChanged("Drugs");
             }
         }
+        public List<AppointmentData> Data
+        {
+            get
+            {
+                return data;
+            }
+            set
+            {
+                if (data == value)
+                    return;
+                data = appointmentController.GetAppointmentData(doctorId);
+                NotifyPropertyChanged("Data");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged(string propertyName)
         {
@@ -414,6 +537,16 @@ namespace HealthcareMD.ViewModel
                 NotifyPropertyChanged("Model");
             }
         }
+
+        public MyICommand NewAppointmentCommand { get; set; }
+        public MyICommand ReferralCommand { get; set; }
+        public MyICommand ShowCommand { get; set; }
+        public MyICommand ShowListCommand { get; set; }
+        public MyICommand UpdateCommand { get; set; }
+        public MyICommand DeleteCommand { get; set; }
+        public MyICommand ReportCommand { get; set; }
+        public MyICommand PrescCommand { get; set; }
+        public MyICommand DrugReportCommand { get; set; }
 
     }
 }

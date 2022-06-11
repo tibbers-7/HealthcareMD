@@ -52,6 +52,7 @@ namespace HealthcareMD.ViewModel
         internal string operationMessage = "izmenjen";
 
         private AppointmentController apptController;
+        private PatientController patientController;
         private int errorCode;
 
         public NewAppointmentViewModel(int id,int doctorId)
@@ -59,6 +60,7 @@ namespace HealthcareMD.ViewModel
             var app = Application.Current as App;
             apptController = app.appointmentController;
             roomController = app.roomController;
+            patientController = app.patientController;
             this.id = id;
             this.doctorId = doctorId;
 
@@ -85,6 +87,12 @@ namespace HealthcareMD.ViewModel
         internal void ShowChart(int id)
         {
             Appointment appt= apptController.GetById(id);
+            Patient patient=patientController.GetById(appt.Patient);
+            if (patient == null)
+            {
+                MessageBox.Show("Pacijent ne postoji u bazi!", "Interna greška");
+                return;
+            }
             PatientChart chartWindow = new PatientChart(appt.Patient);
             chartWindow.Show();
         }

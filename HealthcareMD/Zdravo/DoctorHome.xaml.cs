@@ -13,11 +13,12 @@ namespace HealthcareMD
 
         private DoctorHomeViewModel viewModel;
         private int doctorId;
+        
 
         public DoctorHome(int doctorId)
         {
             this.doctorId = doctorId;
-            viewModel = new DoctorHomeViewModel(doctorId);
+            viewModel = new DoctorHomeViewModel(this,doctorId);
             DataContext = viewModel;
             InitializeComponent();
 
@@ -25,35 +26,102 @@ namespace HealthcareMD
 
 
 
-        private void UpcomingRow_DoubleClick(object sender, RoutedEventArgs e)
+        public void UpcomingRow_DoubleClick(object sender, RoutedEventArgs e)
         {
             object item = UpcomingTable.SelectedItem;
             viewModel.AppointmentShow(int.Parse((UpcomingTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
         }
 
-        private void PassedRow_DoubleClick(object sender, RoutedEventArgs e)
+        public void PassedRow_DoubleClick(object sender, RoutedEventArgs e)
         {
             object item = PassedTable.SelectedItem;
             viewModel.AppointmentShow(int.Parse((PassedTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
         }
 
-        private void PatientRow_DoubleClick(object sender, RoutedEventArgs e)
+        public void PassedGotFocus(object sender, RoutedEventArgs e)
+        {
+            UpcomingTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            VacationsList.SelectedItem = null;
+        }
+
+        public void UpcomingGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            VacationsList.SelectedItem = null;
+        }
+
+        public void PatientsGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            UpcomingTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            VacationsList.SelectedItem = null;
+        }
+        public void DrugsGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            UpcomingTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            VacationsList.SelectedItem = null;
+        }
+        public void VacationsGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            UpcomingTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            VacationsList.SelectedItem = null;
+        }
+        public void VacationsListGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            UpcomingTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            TodaysApptsList.SelectedItem = null;
+            viewModel.selectedAppt = null;
+        }
+        public void TodaysApptsGotFocus(object sender, RoutedEventArgs e)
+        {
+            PassedTable.SelectedItem = null;
+            PatientTable.SelectedItem = null;
+            DrugsTable.SelectedItem = null;
+            UpcomingTable.SelectedItem = null;
+            VacationTable.SelectedItem = null;
+            VacationsList.SelectedItem=null;
+            viewModel.selectedVacation = null;
+        }
+        public void PatientRow_DoubleClick(object sender, RoutedEventArgs e)
         {
             object item = PatientTable.SelectedItem;
             viewModel.PatientShow(int.Parse((PatientTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
         }
-        private void DrugRow_DoubleClick(object sender, RoutedEventArgs e)
+        public void DrugRow_DoubleClick(object sender, RoutedEventArgs e)
         {
             object item = DrugsTable.SelectedItem;
             viewModel.DrugShow(int.Parse((DrugsTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
         }
 
-        private void VacationRow_DoubleClick(object sender, RoutedEventArgs e)
+        public void VacationRow_DoubleClick(object sender, RoutedEventArgs e)
         {
             object item = VacationTable.SelectedItem;
             viewModel.VacationShow(int.Parse((VacationTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
         }
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        public void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow m = new MainWindow();
             m.Show();
@@ -62,40 +130,38 @@ namespace HealthcareMD
             
         }
 
-        private void Referral_Click(object sender, RoutedEventArgs e)
+        public void Referral_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ShowReferral();
         }
 
-        private void VacationButton_Click(object sender, RoutedEventArgs e)
+        public void VacationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (vacationRadio.IsChecked == false && sickLeaveRadio.IsChecked == false) MessageBox.Show("Niste uneli sve potrebne podatke.", "Greška");
-            else if (startDate_tb.Text.Equals("") | endDate_tb.Text.Equals("") | reason_tb.Text.Equals("")) MessageBox.Show("Niste uneli sve potrebne podatke.", "Greška");
-            else viewModel.ScheduleVacation((bool)emergency_Check.IsChecked);
+            viewModel.ScheduleVacation();
             
 
         }
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        public void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             viewModel.RefreshAppointments();
         }
 
 
-        private void NewAppointment_Click(object sender, RoutedEventArgs e)
+        public void NewAppointment_Click(object sender, RoutedEventArgs e)
         {
             viewModel.NewAppointment();
             Plot.InvalidatePlot(true);
         }
 
-        private void TodaysAppts_DoubleClick(object sender, RoutedEventArgs e)
+        public void TodaysAppts_DoubleClick(object sender, RoutedEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
-            Appointment appt = (Appointment) item.Content;
-            viewModel.AppointmentShow(appt.Id);
+            Appointment appointment = (Appointment)item.Content;
+            viewModel.AppointmentShow(appointment.Id);
         }
 
-        private void Vacations_DoubleClick(object sender, RoutedEventArgs e)
+        public void Vacations_DoubleClick(object sender, RoutedEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
             VacationString vacation = (VacationString)item.Content;
@@ -104,19 +170,12 @@ namespace HealthcareMD
         }
 
 
-        private void Update_Click(object sender, RoutedEventArgs e)
+        public void Update_Click(object sender, RoutedEventArgs e)
         {
-            object item = UpcomingTable.SelectedItem;
-            if (item != null)
-            {
-                int id = int.Parse((UpcomingTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
-                viewModel.UpdateAppointment(id);
-                
-            }
-            else MessageBox.Show("Niste odabrali pregled!");
+            viewModel.UpdateAppointment();
         }
 
-        private void Report_Click(object sender, RoutedEventArgs e)
+        public void Report_Click(object sender, RoutedEventArgs e)
         {
             object item = PassedTable.SelectedItem;
             if (item!=null)
@@ -127,49 +186,25 @@ namespace HealthcareMD
             else MessageBox.Show("Niste odabrali pregled!");
         }
 
-        private void Prescription_Click(object sender, RoutedEventArgs e)
+        public void Prescription_Click(object sender, RoutedEventArgs e)
         {
-            object item = PassedTable.SelectedItem;
-            if (item != null)
-            {
-                int id = int.Parse((PassedTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
-                viewModel.PrescriptionShow(id);
-               
-            }
-            else MessageBox.Show("Niste odabrali pregled!");
+            viewModel.PrescriptionShow();
         }
 
-        private void RejectDrug_Click(object sender, RoutedEventArgs e)
+        public void RejectDrug_Click(object sender, RoutedEventArgs e)
         {
-            object item = DrugsTable.SelectedItem;
-            if (item != null)
-            {
-                int id = int.Parse((DrugsTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
-                viewModel.ReportDrug(id);
-            }
-            else MessageBox.Show("Niste odabrali pregled!");
+            viewModel.ReportDrug();
             
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        public void Delete_Click(object sender, RoutedEventArgs e)
         {
-            object item = UpcomingTable.SelectedItem;
-            if (item != null)
-            {
-                int id = int.Parse((UpcomingTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
-                viewModel.DeleteAppt(id);
-            }
-            else MessageBox.Show("Niste odabrali pregled!");
+            viewModel.DeleteAppt();
         }
 
         private void PatientReportClick(object sender, RoutedEventArgs e)
         {
-            object item = PatientTable.SelectedItem;
-            if (item != null)
-            {
-                viewModel.PatientReportForm(int.Parse((PatientTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text));
-            }
-            else MessageBox.Show("Niste odabrali pacijenta!");
+            viewModel.PatientReportForm();
         }
     }
 }

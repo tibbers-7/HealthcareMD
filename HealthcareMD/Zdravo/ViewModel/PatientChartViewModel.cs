@@ -36,6 +36,7 @@ namespace HealthcareMD.ViewModel
         private ObservableCollection<Report> reports;
         private ObservableCollection<Prescription> prescriptions;
         private DrugController drugController;
+        private PatientChart callerWindow;
         
 
         public PatientChartViewModel(int patientId)
@@ -46,11 +47,7 @@ namespace HealthcareMD.ViewModel
             patientController = app.patientController;
 
             Patient p=patientController.GetById(patientId);
-            if (p == null)
-            {
-                MessageBox.Show("Pacijent ne postoji u bazi!", "Interna greška");
-                return;
-            }
+            if (p == null) return;
             InitFields(p);
                 
         }

@@ -24,13 +24,13 @@ namespace HealthcareMD.DoctorView
         public VacationWindow(int vacationId)
         {
             InitializeComponent();
-            viewModel = new VacationViewModel(vacationId);
+            viewModel = new VacationViewModel(this,vacationId);
             DataContext = viewModel;
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            viewModel.Accept();
         }
 
     }

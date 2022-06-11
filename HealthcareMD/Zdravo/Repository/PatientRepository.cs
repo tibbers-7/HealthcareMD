@@ -116,10 +116,12 @@ namespace Repository
             }
         }
 
-        internal void AddReport(int patientId, Report report)
+        internal int AddReport(int patientId, Report report)
         {
             Patient patient = GetById(patientId);
+            if (patient == null) return 2;
             patient.AddReport(report);
+            return 0;
         }
 
         internal void UpdateReport(Report report,int patientId)
