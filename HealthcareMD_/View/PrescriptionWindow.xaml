@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HealthcareMD_.DoctorWindows"
+        xmlns:local="clr-namespace:HealthcareMD_.DoctorWindows" xmlns:viewmodel="clr-namespace:HealthcareMD_.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:PrescriptionViewModel}"
         mc:Ignorable="d"
         Title="Recept" Height="391" Width="306" FontFamily="Yu Gothic">
 
@@ -13,6 +13,10 @@
                 Modifiers="Control" 
                 Key="X"
                 Command="{Binding CloseCommand}"/>
+        <KeyBinding 
+                        Modifiers="Control" 
+                        Key="S"
+                        Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <DataTemplate x:Key="highlightRow">
@@ -36,10 +40,7 @@
         <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,10,10,85" Background="#FF99E1D9">
             <DataGrid x:Name="drugTable" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Drugs, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="{x:Null}" Margin="6,10,6,6" GridLinesVisibility="Horizontal" BorderBrush="{x:Null}" Foreground="#FF345F61">
                 <DataGrid.InputBindings>
-                    <KeyBinding 
-                        Modifiers="Control" 
-                        Key="A"
-                        Command="{Binding AcceptCommand}"/>
+                    
                     <KeyBinding 
                         Modifiers="Control" 
                         Key="Space"
@@ -68,22 +69,22 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="70,272,165,10">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="62,272,165,10">
 
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                <StackPanel Height="83" Width="75">
+                <StackPanel Height="73" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="11"/>
 
                 </StackPanel>
             </Button>
 
         </Border>
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="172,272,64,10">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="172,272,53,10">
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="59" Width="88" HorizontalAlignment="Center">
                     <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White" FontSize="11"/>
                 </StackPanel>
             </Button>
         </Border>

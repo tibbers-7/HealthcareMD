@@ -47,6 +47,7 @@ namespace Model
 
         public Appointment()
         {
+            
             reports = new List<Report>();
         }
         public void FromCSV(GroupCollection csvValues)
@@ -83,7 +84,7 @@ namespace Model
         internal string ToCSV()
         {
             //1,3253,38G,2022/01/01,13:00,30,32
-            Regex regexObj = new Regex("\\d+:\\d{2}");
+            Regex regexObj = new Regex("\\d+:\\d{2} [A|P]M");
             Match matchResult = regexObj.Match(time.ToString());
             string _time=matchResult.Value;
             char _emergency,_status;

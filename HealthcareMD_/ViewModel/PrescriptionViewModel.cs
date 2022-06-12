@@ -32,7 +32,7 @@ namespace HealthcareMD_.ViewModel
             drugController=app.drugController;
             this.appointmentId = appointmentId;
             this.callerWindow = callerWindow;
-            drugs = new ObservableCollection<Drug>(drugController.GetAllDrugs());
+            drugs = new ObservableCollection<Drug>(drugController.GetValidDrugs());
             drugs = appointmentController.SetAllergies(drugs,appointmentId);
             AcceptCommand = new MyICommand(Accept);
             ShowCommand = new MyICommand(ShowDrug);

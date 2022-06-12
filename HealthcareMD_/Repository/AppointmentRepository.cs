@@ -134,12 +134,16 @@ namespace HealthcareMD_.Repository
         {
 
             int listCount = appointments.Count;
-            string[] newLines = new string[listCount - 1];
-            int i = 0;
+            string[] newLines = new string[listCount-1];
+            
+            int i = 0;  
             foreach (Appointment newApt in appointments)
             {
-                if (newApt.Id != idAppointment)  newLines[i] = newApt.ToCSV();
-                i++;
+                if (newApt.Id != idAppointment)
+                {
+                    newLines[i] = newApt.ToCSV();
+                    i++;
+                }
             }
 
             errorCode=fileHandler.Write(newLines);

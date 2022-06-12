@@ -97,6 +97,7 @@ namespace HealthcareMD_.Repository
 
         public List<Drug> GetAll()
         {
+            InitDrugs();
             return drugs;
         }
 

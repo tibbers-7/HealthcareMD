@@ -37,6 +37,25 @@ namespace HealthcareMD_
             }
         }
     }
+
+    public class CodeValidation : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                var s = value as string;
+                Regex regexObj = new Regex("([\\w\\d]+)");
+                Match matchResult = regexObj.Match(s);
+                if (matchResult.Success) return new ValidationResult(true, null);
+                else return new ValidationResult(false, "Šifra sme sadržati samo slova i cifre!");
+            }
+            catch
+            {
+                return new ValidationResult(false, "Unknown error occured.");
+            }
+        }
+    }
     public class DateValidation : ValidationRule
     {
 

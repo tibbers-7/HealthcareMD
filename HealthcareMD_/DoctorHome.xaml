@@ -43,6 +43,26 @@
                 Modifiers="Control" 
                 Key="L"
                 Command="{Binding DrugReportCommand}"/>
+        <KeyBinding
+                Modifiers="Control" 
+                Key="D1"
+                Command="{Binding MainTabCommand}"/>
+        <KeyBinding
+                Modifiers="Control" 
+                Key="D2"
+                Command="{Binding ApptTabCommand}"/>
+        <KeyBinding
+                Modifiers="Control" 
+                Key="D3"
+                Command="{Binding PatientsTabCommand}"/>
+        <KeyBinding
+                Modifiers="Control" 
+                Key="D4"
+                Command="{Binding DrugsTabCommand}"/>
+        <KeyBinding
+                Modifiers="Control" 
+                Key="D5"
+                Command="{Binding VacationTabCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
@@ -53,9 +73,11 @@
                             <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
                         </Border>
                         <ControlTemplate.Triggers>
+
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="Black"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="#FF284B4E "/>
                                 <Setter TargetName="Border" Property="Background" Value="White"/>
+
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
@@ -121,38 +143,38 @@
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="85*"/>
-            <ColumnDefinition Width="624*"/>
-            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="763*"/>
+            <ColumnDefinition Width="119*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#70ABAF" Grid.ColumnSpan="2" Margin="0,0,777,0"></Rectangle>
+        <Rectangle Fill="#70ABAF" Margin="0,0,3,0"/>
 
-        <TabControl TabStripPlacement="Left"  Grid.ColumnSpan="3" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontSize="20">
-            <TabItem Style="{DynamicResource TabItemStyle}" Header="Glavna strana" >
+        <TabControl TabStripPlacement="Left"  Grid.ColumnSpan="3" HorizontalAlignment="Left" BorderBrush="{x:Null}" FontSize="20" Width="1042">
+            <TabItem x:Name="mainTab" Style="{DynamicResource TabItemStyle}" Header="Glavna strana[1]" Width="150" FontSize="19" >
                 <Grid Background="#FFF0F7F4" Margin="0,0,-4,8" Width="925">
                     <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="10,10,327,467">
                         <Label Content="Dobrodošli!" Foreground="White" FontSize="40" Margin="171,0,191,0"/>
                     </Border>
-                    <Border BorderBrush="#70ABAF"  BorderThickness="6" CornerRadius="8" Margin="619,10,37,10" Background="#FF99E1D9">
+                    <Border BorderBrush="#FF4C7F82"  BorderThickness="6" CornerRadius="8" Margin="619,10,56,10" Background="#FF99E1D9">
                         <Grid>
                             <Image Source="Resources/doctor.jpg" Margin="56,25,53,364"/>
-                            <Border BorderBrush="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="70,25,68,364"/>
-                            <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="10,168,10,273">
+                            <Border BorderBrush="#FF4C7F82" BorderThickness="3" CornerRadius="8" Margin="67,25,65,364"/>
+                            <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8" Margin="10,168,10,273">
                                 <Label Content="{Binding DoctorName}" Foreground="White" HorizontalContentAlignment="Center" Margin="0,5,-1,-1" FontSize="17"/>
                             </Border>
-                            <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="46,250,44,195">
+                            <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8" Margin="46,250,44,195">
                                 <Label Content="{Binding DoctorProfession}" HorizontalContentAlignment="Center" Foreground="White" FontSize="15" Margin="0,5,0,0"/>
                             </Border>
                         </Grid>
                     </Border>
-                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="10,10,327,449">
-                        <Label Content="Dobrodošli!" Foreground="White" FontSize="40" Margin="171,0,191,0"/>
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="4" CornerRadius="8" Margin="10,10,327,449">
+                        <Label Content="Dobrodošli!" Foreground="White" FontSize="40" Margin="181,-9,181,9"/>
                     </Border>
-                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8,8,0,0" Margin="10,103,725,359">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,0,0" Margin="10,103,725,359">
                         <Label Content="Današnji pregledi" Margin="0,-3,0,3" Foreground="White"/>
                     </Border>
-                    <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="10,147,703,211">
-                        <ListView x:Name="TodaysApptsList" GotFocus="TodaysApptsGotFocus" HorizontalContentAlignment="Center" ItemsSource="{Binding TodaysAppointments}" FontSize="15" >
+                    <Border BorderBrush="#FF4C7F82" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="10,147,703,211">
+                        <ListView x:Name="TodaysApptsList"  GotFocus="TodaysApptsGotFocus" HorizontalContentAlignment="Center" ItemsSource="{Binding TodaysAppointments}" FontSize="12" Foreground="#FF284B4E" Background="#FF99E1D9" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <EventSetter Event="MouseDoubleClick" Handler="TodaysAppts_DoubleClick" />
@@ -160,8 +182,8 @@
                             </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Vreme" Width="100" DisplayMemberBinding="{Binding Time}"/>
-                                    <GridViewColumn Header="Soba" Width="100" DisplayMemberBinding="{Binding Room}"/>
+                                    <GridViewColumn Header="Vreme"  Width="90" DisplayMemberBinding="{Binding Time}"/>
+                                    <GridViewColumn Header="Soba" Width="90" DisplayMemberBinding="{Binding Room}"/>
 
                                 </GridView>
                             </ListView.View>
@@ -173,11 +195,11 @@
                             </ListView.InputBindings>
                         </ListView>
                     </Border>
-                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8,8,0,0" Margin="250,106,565,356">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,0,0" Margin="250,106,565,356">
                         <Label Content="Odmori" Margin="0,-3,0,3" Foreground="White"/>
                     </Border>
-                    <Border BorderBrush="#FF70ABAF" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="250,150,327,211">
-                        <ListView x:Name="VacationsList" GotFocus="VacationsListGotFocus" ItemsSource="{Binding UpcomingVacations}" FontSize="15">
+                    <Border BorderBrush="#FF4C7F82" Background="#FFF0F7F4" BorderThickness="4" CornerRadius="0,8,8,8" Margin="250,150,327,211">
+                        <ListView x:Name="VacationsList" GotFocus="VacationsListGotFocus" ItemsSource="{Binding UpcomingVacations}" FontSize="12" Foreground="#FF284B4E" Background="#FF99E1D9">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <EventSetter Event="MouseDoubleClick" Handler="Vacations_DoubleClick" />
@@ -186,8 +208,8 @@
                             </ListView.ItemContainerStyle>
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Period" Width="200" DisplayMemberBinding="{Binding Period}"/>
-                                    <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding StatusView}">
+                                    <GridViewColumn Header="Period" Width="170" DisplayMemberBinding="{Binding Period}"/>
+                                    <GridViewColumn Header="Status" Width="130" DisplayMemberBinding="{Binding StatusView}">
 
                                     </GridViewColumn>
 
@@ -203,14 +225,14 @@
                             </ListView.InputBindings>
                         </ListView>
                     </Border>
-                    <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="10,344,327,10" />
+                    <oxy:PlotView x:Name="Plot" Model="{Binding Model}" Margin="10,344,327,10" Foreground="#FF284B4E" />
 
-                    <Border BorderBrush="#70ABAF" BorderThickness="5" CornerRadius="8" Margin="10,339,327,10"/>
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="5" CornerRadius="8" Margin="10,339,327,10"/>
 
                 </Grid>
             </TabItem>
 
-            <TabItem Style="{DynamicResource TabItemStyle}"  Header="Pregledi"  FontFamily="Yu Gothic"   BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,0,-1,0"  >
+            <TabItem x:Name="apptTab" Style="{DynamicResource TabItemStyle}"  Header="Pregledi        [2]"  FontFamily="Yu Gothic"   BorderBrush="{x:Null}" Background="{x:Null}" Margin="-2,0,-1,0"  >
 
 
                 <Grid Background="#FFF0F7F4" Margin="0,0,-4,8" Width="925">
@@ -222,37 +244,51 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="18,117,236,325" Grid.ColumnSpan="2">
-                        <Button  Margin="-1,-1,-1,-1" Click="NewAppointment_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
-                            <StackPanel Height="91" Width="94">
-                                <Image Source="Resources/newApptWhite.png" Stretch="Uniform" Height="51" Width="76" Margin="0,10,0,0"/>
-                                <Label x:Name="newApptLabel" Content="Nov pregled [P]" FontSize="12" FontWeight="Normal" Foreground="White" Width="106" Margin="0,-10,0,0"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
-                    <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="97,10,37,487" Grid.Column="1"/>
-                    <Border BorderBrush="#70ABAF" Background="White" BorderThickness="3" CornerRadius="8,8,0,0" Margin="173,10,225,487" Grid.Column="2"/>
-                    <Label Content="Nov Pregled" Margin="42,161,547,213" Grid.ColumnSpan="2"/>
-                    <GroupBox Header="Obavljeni pregledi" Margin="167,10,43,0" Grid.Column="2" Foreground="#FF2D2D2D" FontSize="18">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="18,117,236,317" Grid.ColumnSpan="2">
                         <Grid>
-                            <Border BorderBrush="#70ABAF" BorderThickness="4" CornerRadius="0,8,8,8">
+                            <Button  Margin="-1,-1,-1,-1" Click="NewAppointment_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
+                                <StackPanel Height="91" Width="94">
+                                    <Image Source="Resources/newApptWhite.png" Stretch="Uniform" Height="51" Width="76" Margin="0,10,0,0"/>
+                                    <Label x:Name="newApptLabel" Content="Nov pregled [P]" FontSize="11" FontWeight="Normal" Foreground="White" Width="106" Margin="0,-10,0,0"/>
+                                </StackPanel>
+                            </Button>
+                            <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="-1,125,-3,-130">
+                                <Button  Margin="-1,-1,-1,-1" Click="Referral_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
+                                    <StackPanel>
+                                        <Image Source="/Resources/referralWhite.png" Stretch="Uniform" Height="47" Width="65" Margin="0,10,0,0"></Image>
+                                        <Label x:Name="newReferralLabel" Content="Nov uput [U]" FontSize="11" FontWeight="Normal" Foreground="White" Width="157" Margin="7,0,0,0"/>
+                                    </StackPanel>
+                                </Button>
                             </Border>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="97,10,37,487" Grid.Column="1">
+                        <Label Content="Predstojeći pregledi" Foreground="White" FontSize="16" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="146,10,251,487" Grid.Column="2">
+                        <Label Content="Obavljeni pregledi" Foreground="White" FontSize="16" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Label Content="Nov Pregled" Margin="42,161,547,213" Grid.ColumnSpan="2"/>
 
-                            <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="55,10,207,385">
 
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Background="#FF99E1D9" Grid.Column="2" Margin="146,37,64,10">
+                        <Grid>
+
+                            <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="55,10,207,374">
                                 <Button x:Name="ReportBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Height="118" Width="89" Click="Report_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                                     <StackPanel>
                                         <Image Source="/Resources/reportWhite.png" Stretch="Uniform" Width="50" Height="50" Margin="0,12,0,0"/>
-                                        <Label x:Name="reportLabel" Content="Izveštaj [I]" FontSize="12" FontWeight="Normal" Foreground="White" Width="85" Margin="5,0,0,10"/>
+                                        <Label x:Name="reportLabel" Content="Izveštaj [I]" FontSize="11" FontWeight="Normal" Foreground="White" Width="85" Margin="5,0,0,10"/>
                                     </StackPanel>
                                 </Button>
-
                             </Border>
-                            <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="207,10,55,385" Width="89.8853904282116">
+
+
+                            <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="209,10,57,374" Width="89.8853904282116">
                                 <Button x:Name="PrescriptionBtn"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="109" Width="90" Click="Prescription_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                                     <StackPanel>
                                         <Image Source="/Resources/drugWhite.png" Stretch="Uniform" Width="50" Height="50" Margin="0,10,0,0"/>
-                                        <Label x:Name="prescLabel" Content="Recept [R]" FontSize="12" FontWeight="Normal" Foreground="White" Width="89" Margin="10,0,0,0"/>
+                                        <Label x:Name="prescLabel" Content="Recept [R]" FontSize="11" FontWeight="Normal" Foreground="White" Width="89" Margin="10,0,0,0"/>
                                     </StackPanel>
                                 </Button>
                             </Border>
@@ -261,7 +297,7 @@
                         IsReadOnly ="True"  SelectionMode="Single"
                         ItemsSource="{Binding PassedAppointments, UpdateSourceTrigger=PropertyChanged}" GotFocus="PassedGotFocus"
                         AutoGenerateColumns="False"
-                        Margin="0,103,0,10" HorizontalAlignment="Center" Width="332" Background="#FFDCE1DE" FontSize="13" >
+                        Margin="0,103,0,10" HorizontalAlignment="Center" Width="332" Background="#FF99E1D9" FontSize="13" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF70ABAF" VerticalGridLinesBrush="#FF70ABAF" BorderBrush="{x:Null}" >
                                 <DataGrid.Resources>
                                     <Style TargetType="{x:Type DataGridRow}">
                                         <EventSetter Event="Control.MouseDoubleClick" Handler="PassedRow_DoubleClick"/>
@@ -277,102 +313,98 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Predstojeći pregledi" Margin="90,10,438,0" Grid.Column="1" Grid.ColumnSpan="2" Foreground="#FF2D2D2D" BorderBrush="{x:Null}" FontSize="18">
-                        <Grid>
-                            <Border BorderBrush="#FF70ABAF" BorderThickness="4" CornerRadius="0,8,8,8"></Border>
-                            <Border BorderBrush="#70ABAF" Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="54,10,205,383" Width="89.8853904282116">
-
-                                <Button  x:Name="UpdateBtn"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="111" Width="90" Click="Update_Click" BorderBrush="{x:Null}" Background="{x:Null}" >
-                                    <StackPanel Height="103" Width="70">
-                                        <Image Source="/Resources/editWhite.png" Stretch="Uniform" Height="50" Width="50" Margin="0,10,0,0"></Image>
-                                        <Label x:Name="updateLabel" Content="Izmena [E]" FontSize="12" FontWeight="Normal" Foreground="White"/>
-                                    </StackPanel>
-                                </Button>
+                    </Border>
+                    <Grid>
 
 
+                        <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Background="#FF99E1D9" Margin="133,38,-441,11">
+                            <Grid>
+                                <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="58,10,181,373" Width="96.8">
+                                    <Button  x:Name="UpdateBtn"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="111" Width="90" Click="Update_Click" BorderBrush="{x:Null}" Background="{x:Null}" >
+                                        <StackPanel Height="103" Width="70">
+                                            <Image Source="/Resources/editWhite.png" Stretch="Uniform" Height="50" Width="50" Margin="0,10,0,0"></Image>
+                                            <Label x:Name="updateLabel" Content="Izmena [E]" FontSize="11" FontWeight="Normal" Foreground="White"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Border>
 
-                            </Border>
 
-                            <DataGrid ColumnWidth="*" x:Name="UpcomingTable" GotFocus="UpcomingGotFocus" 
+
+
+                                <DataGrid ColumnWidth="*" x:Name="UpcomingTable" GotFocus="UpcomingGotFocus" 
                         IsReadOnly ="True"  SelectionMode="Single"
                         ItemsSource="{Binding UpcomingAppointments, UpdateSourceTrigger=PropertyChanged}"
                         AutoGenerateColumns="False"
-                        Margin="0,107,0,0" HorizontalAlignment="Center" Width="306" Background="#FFDCE1DE" Height="369" VerticalAlignment="Top" FontSize="13" >
-                                <DataGrid.Resources>
-                                    <Style TargetType="{x:Type DataGridRow}">
-                                        <EventSetter Event="Control.MouseDoubleClick" Handler="UpcomingRow_DoubleClick"/>
-                                    </Style>
-                                </DataGrid.Resources>
+                        Margin="0,104,0,0" HorizontalAlignment="Center" Width="316" Background="#FF99E1D9" Height="366" VerticalAlignment="Top" FontSize="13" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF70ABAF" VerticalGridLinesBrush="#FF70ABAF" BorderBrush="{x:Null}" >
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridRow}">
+                                            <EventSetter Event="Control.MouseDoubleClick" Handler="UpcomingRow_DoubleClick"/>
+                                        </Style>
+                                    </DataGrid.Resources>
 
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID"  Binding="{Binding Id}" MaxWidth="0"/>
-                                    <DataGridTextColumn Header="Pacijent" Width="1.5*" Binding="{Binding Patient}"  />
-                                    <DataGridTextColumn Header="Soba" Width="1*" Binding="{Binding Room}"  />
-                                    <DataGridTextColumn Header="Datum" Width="2*" Binding="{Binding DateString}" />
-                                    <DataGridTextColumn Header="Vreme" Width="1.5*" Binding="{Binding Time}"/>
-                                    <DataGridTextColumn Header="Hitno" Width="1*" Binding="{Binding EmergencyChar}" >
-                                        <DataGridTextColumn.ElementStyle>
-                                            <Style TargetType="{x:Type TextBlock}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="Text" Value="DA">
-                                                        <Setter Property="Background">
-                                                            <Setter.Value>
-                                                                <ImageBrush ImageSource="/Resources/alert.png" Stretch="Uniform"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                        <Setter Property="Foreground" Value="{x:Null}"/>
-                                                    </Trigger>
-                                                    <Trigger Property="Text" Value="NE">
-                                                        <Setter Property="Background">
-                                                            <Setter.Value>
-                                                                <ImageBrush ImageSource="/Resources/x_grey.png" Stretch="Uniform"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                        <Setter Property="Foreground" Value="{x:Null}"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                    </DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID"  Binding="{Binding Id}" MaxWidth="0"/>
+                                        <DataGridTextColumn Header="Pacijent" Width="1.5*" Binding="{Binding Patient}"  />
+                                        <DataGridTextColumn Header="Soba" Width="1*" Binding="{Binding Room}"  />
+                                        <DataGridTextColumn Header="Datum" Width="2*" Binding="{Binding DateString}" />
+                                        <DataGridTextColumn Header="Vreme" Width="1.5*" Binding="{Binding Time}"/>
+                                        <DataGridTextColumn Header="Hitno" Width="1*" Binding="{Binding EmergencyChar}" >
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Text" Value="DA">
+                                                            <Setter Property="Background">
+                                                                <Setter.Value>
+                                                                    <ImageBrush ImageSource="/Resources/alert.png" Stretch="Uniform"/>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="Foreground" Value="{x:Null}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="Text" Value="NE">
+                                                            <Setter Property="Background">
+                                                                <Setter.Value>
+                                                                    <ImageBrush ImageSource="/Resources/x_grey.png" Stretch="Uniform"/>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="Foreground" Value="{x:Null}"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
 
-                            <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="205,10,54,383" Width="89.8853904282116">
-                                <Grid>
-                                    <Button  HorizontalAlignment="Center"  VerticalAlignment="Center" Height="109" Width="88" Click="Delete_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                                        <StackPanel>
-                                            <Image Source="Resources/deleteWhite.png" Stretch="Uniform" Height="50" Width="50"/>
-                                            <Label x:Name="deleteLabel" Content="Obriši [D]" FontSize="12" FontWeight="Normal" Foreground="White"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                            </Border>
+                                <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="205,10,34,373">
+                                    <Grid>
+                                        <Button  HorizontalAlignment="Center"  VerticalAlignment="Center" Height="109" Width="88" Click="Delete_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                                            <StackPanel>
+                                                <Image Source="Resources/deleteWhite.png" Stretch="Uniform" Height="50" Width="50"/>
+                                                <Label x:Name="deleteLabel" Content="Obriši [D]" FontSize="11" FontWeight="Normal" Foreground="White"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                </Border>
 
-                        </Grid>
-                    </GroupBox>
+                            </Grid>
 
-                    <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="16,225,238,215" Grid.ColumnSpan="2">
-                        <Button  Margin="-1,-1,-1,-1" Click="Referral_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
-                            <StackPanel>
-                                <Image Source="/Resources/referralWhite.png" Stretch="Uniform" Height="47" Width="65" Margin="0,10,0,0"></Image>
-                                <Label x:Name="newReferralLabel" Content="Nov uput [U]" FontSize="12" FontWeight="Normal" Foreground="White" Width="157" Margin="7,0,0,0"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
-                    <Label x:Name="requestsLabel" Content="Zahtevi" Margin="31,389,225,103" FontSize="15" FontWeight="Normal" Foreground="White" Grid.ColumnSpan="2"/>
 
+                        </Border>
+
+                    </Grid>
                 </Grid>
-
             </TabItem>
-            <TabItem Style="{DynamicResource TabItemStyle}" Header="Kartoni" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TabItem x:Name="patientTab" Style="{DynamicResource TabItemStyle}" Header="Kartoni          [3]" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,0,0,0">
                 <Grid Background="#FFF0F7F4" Width="910">
-                    <Border BorderBrush="#70ABAF"  BorderThickness="3" CornerRadius="8"  Margin="121,10,10,10">
+                    <Grid.InputBindings>
+
+                    </Grid.InputBindings>
+                    <Border BorderBrush="#FF4C7F82"  BorderThickness="3" CornerRadius="8"  Margin="121,10,59,10" Background="#FF99E1D9">
                         <DataGrid ColumnWidth="*" x:Name="PatientTable" GotFocus="PatientsGotFocus"
                             IsReadOnly ="True"  SelectionMode="Single"
                             ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="False"
-                            Margin="0,7,0,25" HorizontalAlignment="Center" Width="758" Background="#FFDCE1DE" FontWeight="Normal" >
+                            Margin="0,7,0,25" HorizontalAlignment="Center" Width="710" Background="#FF99E1D9" FontWeight="Normal" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF70ABAF" VerticalGridLinesBrush="#FF70ABAF" FontSize="16" BorderBrush="{x:Null}" >
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridRow}">
                                     <EventSetter Event="Control.MouseDoubleClick" Handler="PatientRow_DoubleClick"/>
@@ -388,7 +420,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
-                    <Border Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="18,117,794,325">
+                    <Border Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="18,117,794,325" BorderBrush="#FF4C7F82">
                         <Grid>
                             <Button Click="PatientReportClick" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
                                 <StackPanel>
@@ -400,14 +432,14 @@
                     </Border>
                 </Grid>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItemStyle}" Header="Lekovi" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-1,0" Height="32" VerticalAlignment="Top">
+            <TabItem x:Name="drugsTab" Style="{DynamicResource TabItemStyle}" Header="Lekovi           [4]" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,-2,-1,0" Height="32" VerticalAlignment="Top">
                 <Grid Background="#FFF0F7F4" Width="910">
-                    <Border BorderBrush="#70ABAF"  BorderThickness="3" CornerRadius="8" Margin="121,10,10,10">
+                    <Border BorderBrush="#FF4C7F82"  BorderThickness="3" CornerRadius="8" Margin="121,10,58,10" Background="#FF99E1D9">
                         <DataGrid ColumnWidth="*" x:Name="DrugsTable" GotFocus="DrugsGotFocus"
                     IsReadOnly ="True"  SelectionMode="Single"
                     ItemsSource="{Binding Drugs, UpdateSourceTrigger=PropertyChanged}"
                     AutoGenerateColumns="False"
-                    Margin="0,7,0,25" HorizontalAlignment="Center" Width="759" Background="#FFDCE1DE" FontWeight="Normal" >
+                    Margin="0,7,0,25" HorizontalAlignment="Center" Width="710" Background="#FF99E1D9" FontWeight="Normal" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF70ABAF" VerticalGridLinesBrush="#FF70ABAF" FontSize="16" BorderBrush="{x:Null}" >
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridRow}">
                                     <EventSetter Event="Control.MouseDoubleClick" Handler="DrugRow_DoubleClick"/>
@@ -455,7 +487,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
-                    <Border Background="#FF70ABAF" BorderThickness="1" CornerRadius="8" Margin="18,117,794,325">
+                    <Border Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="18,117,794,325" BorderBrush="#FF4C7F82">
                         <Grid>
                             <Button Click="RejectDrug_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
                                 <StackPanel>
@@ -467,24 +499,35 @@
                     </Border>
                 </Grid>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItemStyle}" Header="Odmor" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TabItem x:Name="vacationTab" Style="{DynamicResource TabItemStyle}" Header="Odmor           [5]" Background="{x:Null}" BorderBrush="{x:Null}" Margin="-2,0,0,0">
 
                 <Grid Background="#FFE5E5E5">
-
+                    <Grid.InputBindings>
+                        <KeyBinding 
+                            Modifiers="Control" 
+                            Key="S"
+                            Command="{Binding ScheduleVacationCommand}"/>
+                    </Grid.InputBindings>
                     <Rectangle Stroke="Black" Fill="#FFF0F7F4" Margin="0,-9,0,0"/>
 
-                    <GroupBox Header="Odaberite tip" Margin="292,0,10,430" Background="#FF99E1D9" Foreground="#FF2D2D2D" FontWeight="Normal">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="297,6,366,491">
+                        <Label Content="Odaberite tip" Foreground="White" FontSize="18" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="297,37,27,428" Background="#FF99E1D9">
+
                         <Grid>
-                            <RadioButton x:Name="vacationRadio" Content="Godišnji odmor" HorizontalAlignment="Left" Margin="33,0,0,-19" Height="80" VerticalAlignment="Bottom" FontSize="30" Foreground="#FF2D2D2D"/>
-                            <RadioButton x:Name="sickLeaveRadio" Content="Bolovanje" HorizontalAlignment="Left" Margin="363,3,0,0" FontSize="30" Foreground="#FF2D2D2D"/>
+                            <RadioButton x:Name="vacationRadio" Content="Godišnji odmor" HorizontalAlignment="Left" Margin="33,0,0,-37" Height="80" VerticalAlignment="Bottom" FontSize="20" Foreground="#FF284B4E"/>
+                            <RadioButton x:Name="sickLeaveRadio" Content="Bolovanje" HorizontalAlignment="Left" Margin="362,23,0,-20" FontSize="20" Foreground="#FF284B4E"/>
                         </Grid>
-                    </GroupBox>
-
-                    <GroupBox Header="Odaberite vremenski period" Margin="292,128,10,268" Background="#FF99E1D9" Foreground="#FF2D2D2D">
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="297,135,307,362">
+                        <Label Content="Odaberite vremenski period" Foreground="White" FontSize="18" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="297,166,27,283" Background="#FF99E1D9">
                         <Grid>
-                            <Label Content="__" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.446,0.057" Foreground="#FF2D2D2D" FontSize="20"/>
+                            <Label Content="__" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.446,0.057" Foreground="#FF284B4E" FontSize="20"/>
 
-                            <TextBox x:Name="startDate_tb" Margin="24,36,317,36" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="0.5,0.5">
+                            <TextBox x:Name="startDate_tb" Margin="24,19,317,23" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="0.5,0.5" Foreground="#FF284B4E">
                                 <TextBox.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="1"/>
@@ -500,7 +543,7 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox>
-                            <TextBox x:Name="endDate_tb" Margin="316,36,25,36" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="0.5,0.5">
+                            <TextBox x:Name="endDate_tb" Margin="316,19,25,23" Validation.ErrorTemplate="{StaticResource validationTemplate}" RenderTransformOrigin="0.5,0.5" Foreground="#FF284B4E">
                                 <TextBox.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="1"/>
@@ -518,7 +561,7 @@
                             </TextBox>
 
                         </Grid>
-                    </GroupBox>
+                    </Border>
 
                     <Button x:Name="Schedule" Content="" Margin="498,350,453,75" Click="VacationButton_Click" BorderBrush="{x:Null}">
                         <Button.Background>
@@ -526,11 +569,15 @@
                         </Button.Background>
                     </Button>
                     <Label Content="-" Margin="292,202,678,208" Foreground="White" FontSize="60"/>
-                    <GroupBox Header="Detalji" Margin="297,279,10,136" Background="#FF99E1D9" Foreground="#FF2D2D2D">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="302,277,447,220">
+                        <Label Content="Detalji" Foreground="White" FontSize="18" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="302,312,22,137" Background="#FF99E1D9">
+
                         <Grid>
-                            <CheckBox x:Name="emergency_Check"  Content="HITNO" Margin="412,32,-272,10" Foreground="#FF2D2D2D" FontSize="30"/>
-                            <Label Content="Razlog:" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.446,0.057" Foreground="#FF2D2D2D" FontSize="20"/>
-                            <TextBox x:Name="reason_tb" HorizontalAlignment="Left" Margin="104,30,0,30" TextWrapping="Wrap" Width="241">
+                            <CheckBox x:Name="emergency_Check"  Content="HITNO" Margin="412,17,-272,25" Foreground="#FF284B4E" FontSize="30"/>
+                            <Label Content="Razlog:" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.446,0.057" Foreground="#FF284B4E" FontSize="20"/>
+                            <TextBox x:Name="reason_tb" HorizontalAlignment="Left" Margin="104,17,0,25" TextWrapping="Wrap" Width="241" Foreground="#FF284B4E">
                                 <Binding Path="Reason" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
                                         <local:RequiredFieldValidation ValidationStep="RawProposedValue"/>
@@ -538,20 +585,24 @@
                                 </Binding>
                             </TextBox>
                         </Grid>
-                    </GroupBox>
-                    <Border BorderBrush="#70ABAF" Background="#70ABAF" BorderThickness="1" CornerRadius="8" Margin="547,443,241,10" Width="88" Height="106">
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="569,421,226,25">
                         <Grid>
                             <Button x:Name="scheduleVacationBtn"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="84" Width="86" Click="VacationButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                                 <StackPanel>
                                     <Image Source="/Resources/vacationWhite.png" Height="47" Width="57"/>
-                                    <Label x:Name="vacationLabel" Content="Zakaži" FontSize="12" FontWeight="Normal" Foreground="White"/>
+                                    <Label x:Name="vacationLabel" Content="Zakaži [S]" FontSize="12" FontWeight="Normal" Foreground="White"/>
                                 </StackPanel>
                             </Button>
 
                         </Grid>
                     </Border>
-                    <GroupBox Header="Lista Vaših odsustva" Margin="0,10,609,0">
-                        <DataGrid x:Name="VacationTable" ItemsSource="{Binding Vacations}" AutoGenerateColumns="False" IsReadOnly="True" FontSize="13" GotFocus="VacationsGotFocus">
+                    <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="10,10,653,487">
+                        <Label Content="Lista vaših odsustva" Foreground="White" FontSize="18" Margin="7,-3,-23,-18"/>
+                    </Border>
+                    <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,41,597,24" Background="#FF99E1D9">
+
+                        <DataGrid x:Name="VacationTable" ItemsSource="{Binding Vacations}" AutoGenerateColumns="False" IsReadOnly="True" FontSize="13" GotFocus="VacationsGotFocus" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF70ABAF" VerticalGridLinesBrush="#FF70ABAF" Background="#FF99E1D9">
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridRow}">
                                     <EventSetter Event="Control.MouseDoubleClick" Handler="VacationRow_DoubleClick"/>
@@ -591,7 +642,7 @@
                                                 <Trigger Property="Text" Value="denied">
                                                     <Setter Property="Background">
                                                         <Setter.Value>
-                                                            <ImageBrush ImageSource="/Resources/close.png" Stretch="Uniform"/>
+                                                            <ImageBrush ImageSource="/Resources/rejected.png" Stretch="Uniform"/>
                                                         </Setter.Value>
                                                     </Setter>
                                                     <Setter Property="Foreground" Value="{x:Null}"/>
@@ -603,7 +654,8 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </GroupBox>
+                    </Border>
+
                 </Grid>
             </TabItem>
 
@@ -611,20 +663,30 @@
         </TabControl>
 
 
-        <Button HorizontalAlignment="Left" Margin="10,501,0,0"  HorizontalContentAlignment="Left" BorderThickness="2" VerticalAlignment="Top" Height="41" Width="111" Click="LogoutButton_Click" Grid.ColumnSpan="2" Background="{x:Null}" Foreground="White" BorderBrush="White">
+        <Button HorizontalAlignment="Left" Margin="10,478,0,0"  HorizontalContentAlignment="Left" BorderThickness="2" VerticalAlignment="Top" Height="41" Width="131" Click="LogoutButton_Click" Background="{x:Null}" Foreground="White" BorderBrush="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
 
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                <TextBlock Margin="0,0,2,0">Odjavi se</TextBlock>
-                <Image Source="Resources\logout_white.png"  Width="53" Height="24" Margin="-10,0,0,0" />
+            <StackPanel Orientation="Horizontal" Width="96" Margin="15,0,0,0">
+                <TextBlock Width="69"><Run Text="Odjavi se"/></TextBlock>
+                <Image Source="Resources\logout_white.png"  Width="22" Height="24" />
             </StackPanel>
 
         </Button>
 
+        <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="4" CornerRadius="8" Margin="152,-19,0,-20"/>
+        <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="4" CornerRadius="8" Margin="-6,159,4,397" />
+
+        <Border BorderBrush="White" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,183,26,281">
+            <Grid>
+                <Image Source="/Resources/tip.png" Margin="-6,7,70,40"/>
+                <TextBlock Text="Ctrl + Space " TextDecorations="Underline"  Foreground="White" Margin="34,10,-34,-10"/>
+                <Label Content="Pregled podataka&#xD;&#xA; iz tabela i lista" Foreground="White" Margin="10,30,-41,-30" FontSize="11"/>
+            </Grid>
+        </Border>
 
 
     </Grid>

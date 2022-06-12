@@ -14,7 +14,7 @@
                 Command="{Binding CancelCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="A"
+                Key="S"
                 Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Grid Margin="0,10,0,0">
@@ -37,7 +37,7 @@
             <Button x:Name="Schedule" Margin="-3,-3,-3,-3" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="68" Width="66" HorizontalAlignment="Center">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="34" Width="32"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" HorizontalAlignment="Center" FontSize="11"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" HorizontalAlignment="Center" FontSize="11"/>
 
                 </StackPanel>
             </Button>

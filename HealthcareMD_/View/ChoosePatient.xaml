@@ -20,11 +20,11 @@
 
 
         <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="8,8,8,8" Margin="10,0,10,85" Background="#FF99E1D9">
-            <DataGrid x:Name="patientTable" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="{x:Null}" Margin="6,6,6,6" GridLinesVisibility="Horizontal" BorderBrush="{x:Null}">
+            <DataGrid x:Name="patientTable" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" IsReadOnly ="True" SelectionMode="Single" ColumnWidth="*" Background="{x:Null}" Margin="6,6,6,6" GridLinesVisibility="Horizontal" BorderBrush="{x:Null}" Foreground="#FF284B4E" HorizontalGridLinesBrush="#FF284B4E">
                 <DataGrid.InputBindings>
                     <KeyBinding 
                         Modifiers="Control" 
-                        Key="A"
+                        Key="S"
                         Command="{Binding AcceptCommand}"/>
                     <KeyBinding 
                         Modifiers="Control" 
@@ -46,9 +46,9 @@
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="70,268,162,10">
 
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                <StackPanel Height="83" Width="75">
-                    <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
+                <StackPanel Height="73" Width="75">
+                    <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="33" Width="30"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="10"/>
 
                 </StackPanel>
             </Button>
@@ -57,8 +57,8 @@
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="172,268,57,10">
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="59" Width="88" HorizontalAlignment="Center">
-                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
+                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="34" Width="35"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White" FontSize="10"/>
                 </StackPanel>
             </Button>
         </Border>

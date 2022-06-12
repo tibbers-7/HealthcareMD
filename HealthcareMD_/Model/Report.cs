@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Tools;
 
 namespace Model
 {
@@ -19,6 +20,8 @@ namespace Model
         public int PatientId { get { return patientId; } set { patientId = value; } }
         private string anamnesis;
         public string Anamnesis { get { return anamnesis; } set { anamnesis = value; } }
+
+        public string DateString { get { return date.ToString("dd/MM/yyyy"); } set { date = TimeTools.ParseDate(value); } }
 
         internal void FromCSV(GroupCollection csvValues)
         {

@@ -123,10 +123,7 @@ namespace HealthcareMD_
         }
         public void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow m = new MainWindow();
-            m.Show();
-            
-           this.Close();
+            viewModel.Logout();
             
         }
 
@@ -177,13 +174,7 @@ namespace HealthcareMD_
 
         public void Report_Click(object sender, RoutedEventArgs e)
         {
-            object item = PassedTable.SelectedItem;
-            if (item!=null)
-            {
-                int id = int.Parse((PassedTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
-                viewModel.ReportShow(id);
-            }
-            else MessageBox.Show("Niste odabrali pregled!");
+            viewModel.ReportShow();
         }
 
         public void Prescription_Click(object sender, RoutedEventArgs e)

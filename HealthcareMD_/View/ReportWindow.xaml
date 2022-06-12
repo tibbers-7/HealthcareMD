@@ -15,7 +15,7 @@
                 Command="{Binding CloseCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="A"
+                Key="S"
                 Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
@@ -56,51 +56,52 @@
             <Label Content="Datum:" HorizontalAlignment="Left" Margin="32,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.046,0.543" Foreground="#FF345F61"/>
             <Label Content="Dijagnoza:" HorizontalAlignment="Left" Margin="279,22,0,0" VerticalAlignment="Top" Foreground="#FF345F61"/>
             <TextBox x:Name="diagnosis_tb" Validation.ErrorTemplate="{StaticResource validationTemplate}" HorizontalAlignment="Left" Margin="357,26,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="86" Height="28" Foreground="#FF345F61">
-                <Binding Path="Diagnosis" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Diagnosis" UpdateSourceTrigger="LostFocus">
                     <Binding.ValidationRules>
                         <local:RequiredFieldValidation ValidationStep="RawProposedValue"/>
+                        <local:CodeValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
             <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="10,74,371,208"/>
-            <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="246,74,102,199"/>
+            <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="243,74,102,199"/>
 
 
 
         </Grid>
         <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="10,110,245,93" Background="#FF99E1D9" Grid.ColumnSpan="2">
             <TextBox x:Name="reportString_tb" Validation.ErrorTemplate="{StaticResource validationTemplate}"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="196" Background="White" Height="171" Foreground="#FF345F61">
-                <Binding Path="ReportString" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="ReportString" UpdateSourceTrigger="LostFocus">
                     <Binding.ValidationRules>
-                        <HealthcareMD_:RequiredFieldValidation ValidationStep="RawProposedValue"/>
+                        <local:RequiredFieldValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
         </Border>
         <Label Content="Izveštaj" HorizontalAlignment="Left" Margin="7,77,0,0" VerticalAlignment="Top" FontSize="18" Grid.Column="1" Foreground="White"/>
         <Label Content="Anamneza" HorizontalAlignment="Left" Margin="249,77,0,0" VerticalAlignment="Top" FontSize="18" Grid.Column="1" Foreground="White"/>
-        <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="234,110,10,93" Background="#FF99E1D9" Grid.Column="1">
+        <Border BorderBrush="#FF4C7F82" BorderThickness="4" CornerRadius="0,8,8,8" Margin="232,110,10,93" Background="#FF99E1D9" Grid.Column="1">
             <TextBox x:Name="anamnesis_tb" Validation.ErrorTemplate="{StaticResource validationTemplate}"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="192" Background="White" Height="174" Foreground="#FF345F61">
-                <Binding Path="Anamnesis" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Anamnesis" UpdateSourceTrigger="LostFocus">
                     <Binding.ValidationRules>
-                        <HealthcareMD_:RequiredFieldValidation ValidationStep="RawProposedValue"/>
+                        <local:RequiredFieldValidation ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
         </Border>
 
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="147,314,262,10" Grid.Column="1">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="136,314,262,10" Grid.Column="1">
 
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                <StackPanel Height="83" Width="75">
+                <StackPanel Height="73" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="12"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="12"/>
 
                 </StackPanel>
             </Button>
 
         </Border>
-        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="249,314,161,10" Grid.Column="1">
+        <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="249,314,147,10" Grid.Column="1">
             <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="59" Width="88" HorizontalAlignment="Center">
                     <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>

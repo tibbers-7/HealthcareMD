@@ -39,6 +39,7 @@ namespace HealthcareMD_.ViewModel
         private DrugController drugController;
         private PatientChart callerWindow;
         public MyICommand AcceptCommand { get; set; }
+        public MyICommand ShowCommand { get; set; }
 
 
 
@@ -50,11 +51,26 @@ namespace HealthcareMD_.ViewModel
             patientController = app.patientController;
             this.callerWindow = callerWindow;
             AcceptCommand=new MyICommand(Accept);
+            ShowCommand = new MyICommand(Show);
 
             Patient p=patientController.GetById(patientId);
             if (p == null) return;
             InitFields(p);
                 
+        }
+
+        internal void Show()
+        {
+            if (callerWindow.ReportList.SelectedItem != null)
+            {
+                Report report = callerWindow.ReportList.SelectedItem as Report;
+                ShowReport(report.Id);
+            }
+            else if (callerWindow.PrescList.SelectedItem != null)
+            {
+                Prescription presc = callerWindow.PrescList.SelectedItem as Prescription;
+                ShowDrug(presc.DrugId);
+            }
         }
 
         internal void Accept()

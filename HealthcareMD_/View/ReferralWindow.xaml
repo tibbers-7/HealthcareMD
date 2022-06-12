@@ -17,8 +17,12 @@
                 Command="{Binding CancelCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="A"
+                Key="S"
                 Command="{Binding AcceptCommand}"/>
+        <KeyBinding 
+                Modifiers="Control" 
+                Key="P"
+                Command="{Binding PatientCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <ControlTemplate x:Key="validationTemplate">
@@ -61,7 +65,7 @@
             <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="8" Margin="231,56,19,115">
                 <Button x:Name="patientButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="142" Click="PatientButton_Click" FontSize="12" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                     <StackPanel Orientation="Horizontal">
-                        <Label x:Name="patientLabel" Content="Izaberi Pacijenta" Foreground="White"/>
+                        <Label x:Name="patientLabel" Content="Izaberi Pacijenta [P]" Foreground="White" Width="112" FontSize="11"/>
                         <Image Source="/Resources/patientWhite.png" Stretch="Uniform" Height="30" Width="27"/>
                     </StackPanel>
                 </Button>
@@ -81,13 +85,13 @@
 
         <CheckBox IsChecked="{Binding Emergency}" x:Name="emergency_cb" Content="Hitno" HorizontalAlignment="Left" Margin="166,67,0,0" VerticalAlignment="Top" Height="31" Width="90" FontSize="20" RenderTransformOrigin="0.429,4.4" Grid.Row="1" Foreground="#FF345F61"/>
         <Label Content="upućuje:" HorizontalAlignment="Left" Margin="298,4,0,0" VerticalAlignment="Top" Foreground="#FF345F61"/>
-        <TextBox HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" IsReadOnly="True" Text="{Binding CurrentDoctor}" VerticalAlignment="Top" Width="288" Background="White" Foreground="#FF345F61"/>
+        <TextBox HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Center" IsReadOnly="True" Text="{Binding CurrentDoctor}" VerticalAlignment="Top" Width="288" Background="White" Foreground="#FF345F61"/>
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="112,103,209,10" Grid.Row="1">
 
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="ScheduleButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="83" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76"/>
 
                 </StackPanel>
             </Button>

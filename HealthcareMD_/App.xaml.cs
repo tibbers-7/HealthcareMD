@@ -37,7 +37,7 @@ namespace HealthcareMD_
             var prescriptionRepository = new PrescriptionRepository();
             var patientRepository=new PatientRepository(reportRepository,prescriptionRepository);
             var appointmentRepository = new AppointmentRepository(doctorRepository,patientRepository);
-            var vacationRepository = new VacationRepository();
+            var vacationRepository = new VacationRepository(doctorRepository);
             var drugReportRepository = new DrugReportRepository();
 
             var roomService=new RoomService(roomRepository);

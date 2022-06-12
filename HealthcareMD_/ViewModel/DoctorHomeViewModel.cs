@@ -19,6 +19,7 @@ using OxyPlot.Axes;
 using System.Windows.Media;
 using Tools;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace HealthcareMD_.ViewModel
 {
     public class DoctorHomeViewModel : BindableBase, INotifyPropertyChanged
@@ -111,6 +112,16 @@ namespace HealthcareMD_.ViewModel
             
             model.Series.Add(barSeries);
             model.Axes.Add(categoryAxis);
+            model.TitleColor = OxyColor.FromRgb(76, 126, 130);
+            model.TextColor= OxyColor.FromRgb(76, 126, 130); 
+        }
+
+        internal void Logout()
+        {
+            MainWindow m = new MainWindow();
+            m.Show();
+
+            doctorHome.Close();
         }
 
         private void InitInteractivity()
@@ -123,13 +134,20 @@ namespace HealthcareMD_.ViewModel
             ReportCommand = new MyICommand(Report);
             PrescCommand = new MyICommand(PrescriptionShow);
             DrugReportCommand = new MyICommand(ReportDrug);
+            MainTabCommand=new MyICommand(MainTabShow);
+            ApptTabCommand = new MyICommand(ApptTabShow);
+            PatientsTabCommand = new MyICommand(PatientsTabShow);
+            DrugsTabCommand = new MyICommand(DrugsTabShow);
+            VacationTabCommand = new MyICommand(VacationTabShow);
+            ScheduleVacationCommand=new MyICommand(ScheduleVacation);
+
         }
 
         private void Report()
         {
-            if (doctorHome.PassedTable.SelectedItem != null) ReportShow(int.Parse((doctorHome.PassedTable.SelectedCells[0].Column.GetCellContent(doctorHome.PassedTable.SelectedItem) as TextBlock).Text));
+            if (doctorHome.PassedTable.SelectedItem != null) ReportShow();
             else if (doctorHome.PatientTable.SelectedItem != null) PatientReportForm();
-
+            else MessageBox.Show("Niste odabrali pregled/pacijenta!", "Obaveštenje");
 
         }
         private void GetDataForChart()
@@ -140,7 +158,7 @@ namespace HealthcareMD_.ViewModel
             foreach (AppointmentData data_ in data)
             {
                 barItems.Add(new BarItem { Value = data_.AppointmentCount });
-                categorySource[i++] = data_.Day.ToString();
+                categorySource[i++] = data_.DaySerbian;
             }
 
             barSeries = new BarSeries
@@ -149,8 +167,10 @@ namespace HealthcareMD_.ViewModel
                 LabelPlacement = LabelPlacement.Inside,
 
             };
+            //#FF99E1D9
+            barSeries.FillColor= OxyColor.FromRgb(112, 171, 175);
 
-            categoryAxis= new CategoryAxis
+            categoryAxis = new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 Key = "DaysAxis",
@@ -167,6 +187,7 @@ namespace HealthcareMD_.ViewModel
             else if (doctorHome.PatientTable.SelectedItem != null) PatientShow(int.Parse((doctorHome.PatientTable.SelectedCells[0].Column.GetCellContent(doctorHome.PatientTable.SelectedItem) as TextBlock).Text));
             else if (doctorHome.TodaysApptsList.SelectedItem!=null)
             {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 Appointment appt = doctorHome.TodaysApptsList.SelectedItem as Appointment;
                 AppointmentShow(appt.Id);
             }
@@ -214,6 +235,7 @@ namespace HealthcareMD_.ViewModel
             UpcomingAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             PassedAppointments = new ObservableCollection<Appointment>(appointmentController.GetPassedAppointmentsForDoctor(doctorId));
             Data = appointmentController.GetAppointmentData(doctorId);
+            TodaysAppointments = new ObservableCollection<Appointment>(appointmentController.GetTodaysAppointments(doctorId));
             
             InitOxyChart();
             Model.InvalidatePlot(true);
@@ -229,7 +251,7 @@ namespace HealthcareMD_.ViewModel
                 DrugReportWindow drugReportWindow = new DrugReportWindow(this, id);
                 drugReportWindow.Show();
             }
-            else MessageBox.Show("Niste odabrali pregled!");
+            else MessageBox.Show("Niste odabrali lek!");
             
         }
 
@@ -306,6 +328,7 @@ namespace HealthcareMD_.ViewModel
             {
                 case 0:
                     MessageBox.Show("Zahtev za slobodne dane je uspešno poslat.", "Obaveštenje");
+                    ClearVacationFields();
                     break;
                 case 1:
                     MessageBox.Show("Navedeni datum je prošao!", "Greška");
@@ -323,14 +346,42 @@ namespace HealthcareMD_.ViewModel
                     MessageBox.Show("Neuspešan upis u datoteku!", "Interna greška");
                     break;
             }
+
+
+        }
+
+        private void ClearVacationFields()
+        {
+            doctorHome.startDate_tb.Text = "";
+            doctorHome.endDate_tb.Text = "";
+            doctorHome.reason_tb.Text = "";
+            doctorHome.emergency_Check.IsChecked = false;
+            doctorHome.vacationRadio.IsChecked = false;
+            doctorHome.sickLeaveRadio.IsChecked = false;
+
         }
 
         
 
-        internal void ReportShow(int id)
+        internal void ReportShow()
         {
-            ReportWindow reportWindow = new ReportWindow(id, 0, 0, null);
-            reportWindow.Show();
+            object item = doctorHome.PassedTable.SelectedItem;
+            if (item != null)
+            {
+                int id = int.Parse((doctorHome.PassedTable.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text);
+                Appointment appt=appointmentController.GetById(id);
+                Patient patient=patientController.GetById(appt.Patient);
+                if (patient != null)
+                {
+                    ReportWindow reportWindow = new ReportWindow(id, 0, 0, null);
+                    reportWindow.Show();
+                }
+                else MessageBox.Show("Pacijent ne postoji u bazi!", "Interna greška");
+
+            }
+            else MessageBox.Show("Niste odabrali pregled!");
+
+            
         }
 
         internal void DeleteAppt()
@@ -378,6 +429,7 @@ namespace HealthcareMD_.ViewModel
                     MessageBox.Show("Neuspešan upis u datoteku!", "Interna greška");
                     break;
             }
+            RefreshAppointments();
         }
 
 
@@ -546,6 +598,36 @@ namespace HealthcareMD_.ViewModel
         public MyICommand ReportCommand { get; set; }
         public MyICommand PrescCommand { get; set; }
         public MyICommand DrugReportCommand { get; set; }
+        public MyICommand MainTabCommand { get; set; }
+        public MyICommand ApptTabCommand { get; set; }
+        public MyICommand PatientsTabCommand { get; set; }
+        public MyICommand DrugsTabCommand { get; set; }
+        public MyICommand VacationTabCommand { get; set; }
+        public MyICommand ScheduleVacationCommand { get; set; }
+        public MyICommand LogoutCommand { get; set; }
+
+
+        private void MainTabShow()
+        {
+            doctorHome.mainTab.IsSelected=true;
+        }
+        private void ApptTabShow()
+        {
+            doctorHome.apptTab.IsSelected = true;
+        }
+
+        private void PatientsTabShow()
+        {
+            doctorHome.patientTab.IsSelected = true;
+        }
+        private void DrugsTabShow()
+        {
+            doctorHome.drugsTab.IsSelected = true;
+        }
+        private void VacationTabShow()
+        {
+            doctorHome.vacationTab.IsSelected = true;
+        }
 
     }
 }

@@ -42,6 +42,7 @@ namespace HealthcareMD_.ViewModel
         private int errorCode;
         public MyICommand CancelCommand { get; set; }
         public MyICommand AcceptCommand { get; set; }
+        public MyICommand PatientCommand { get; set; }
         private ReferralWindow callerWindow;
         public ReferralViewModel(ReferralWindow callerWindow,int doctorId)
         {
@@ -53,6 +54,7 @@ namespace HealthcareMD_.ViewModel
             this.callerWindow = callerWindow;
             AcceptCommand = new MyICommand(ScheduleReferral);
             CancelCommand=new MyICommand(Cancel);
+            PatientCommand = new MyICommand(ChoosePatientShow);
 
         }
 
@@ -64,8 +66,8 @@ namespace HealthcareMD_.ViewModel
 
         internal void ScheduleReferral()
         {
-            if (callerWindow.surgery_rb.IsChecked == false && callerWindow.appt_tb.IsChecked == false) MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška");
-            
+            if (callerWindow.surgery_rb.IsChecked == false && callerWindow.appt_tb.IsChecked == false) { MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška"); return; } ;
+            if (callerWindow.doctorSpecialization_cb.SelectedIndex == -1) { MessageBox.Show("Niste uneli sve neophodne informacije!", "Greška"); return; };
             errorCode = apptController.CreateReferral(patientId,doctorId, doctorSpecialization, appt,emergency);
             switch (errorCode)
             {
@@ -86,11 +88,6 @@ namespace HealthcareMD_.ViewModel
 
         }
 
-        internal void ShowChart()
-        {
-            PatientChart chartWindow = new PatientChart(patientId);
-            chartWindow.Show();
-        }
 
         internal void UpdatePatient(int chosenPatient)
         {

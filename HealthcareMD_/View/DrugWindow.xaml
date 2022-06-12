@@ -37,8 +37,8 @@
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="278,332,38,10">
             <Button  Margin="-1,-1,-1,-1" Foreground="Black" BorderBrush="{x:Null}" Click="CancelButton_Click" RenderTransformOrigin="0.142,0.458" Background="{x:Null}">
                 <StackPanel Height="70">
-                    <Image Source="/Resources/acceptWhite.png" Height="38" Width="34"/>
-                    <Label Content="Prihvati [X]" Foreground="White" Width="97" FontSize="11"/>
+                    <Image Source="/Resources/cancelWhite.png" Height="38" Width="34"/>
+                    <Label Content="Otkaži [X]" Foreground="White" Width="97" FontSize="11"/>
                 </StackPanel>
             </Button>
         </Border>

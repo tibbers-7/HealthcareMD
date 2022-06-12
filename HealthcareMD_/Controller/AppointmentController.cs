@@ -57,7 +57,8 @@ namespace HealthcareMD_.Controller
 
         public int CreateAppointment(int patientId, int doctor, int roomId, int hours, int minutes, int duration, string date, bool emergency)
         {
-            Appointment appt = new Appointment() { Date = TimeTools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctor, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, Status = Status.accepted, DoctorSchedules = doctor, Type = 'A' };
+            TimeOnly time = TimeTools.ParseTime(hours, minutes);
+            Appointment appt = new Appointment() { Date = TimeTools.ParseDate(date), Time = time, Doctor = doctor, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, Status = Status.accepted, DoctorSchedules = doctor, Type = 'A' };
             return service.CreateAppointment(appt,patientId,null);
         }
 
@@ -68,7 +69,6 @@ namespace HealthcareMD_.Controller
 
         internal ObservableCollection<string> GetAllSpetializations()
         {
-            DoctorRepository doctorRepository = new DoctorRepository();
             return new ObservableCollection<string>(doctorRepository.GetAllSpetializations());
         }
 
@@ -113,7 +113,9 @@ namespace HealthcareMD_.Controller
         
         public int UpdateAppointment(int id, int patientId,int doctorId, int roomId, int hours, int minutes, int duration,string date, bool emergency)
         {
-            Appointment appt = new Appointment() { Id = id, Date = TimeTools.ParseDate(date), Time = new TimeOnly(hours, minutes), Doctor = doctorId, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, DoctorSchedules=doctorId, Type='A', Status = Status.accepted };
+
+            TimeOnly time = TimeTools.ParseTime(hours, minutes);
+            Appointment appt = new Appointment() { Id = id, Date = TimeTools.ParseDate(date), Time=time, Doctor = doctorId, Duration = duration, Patient = patientId, Room = roomId, Emergency = emergency, DoctorSchedules=doctorId, Type='A', Status = Status.accepted };
             return service.Update(appt);
         }
 

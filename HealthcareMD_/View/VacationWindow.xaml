@@ -72,8 +72,8 @@
 
                 <Button x:Name="Accept" Margin="-1,-1,-1,-1" Click="AcceptButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                     <StackPanel Height="70" Width="87">
-                        <Image Source="/Resources/acceptWhite.png" Height="38" Width="48" Margin="0,0,30,0"/>
-                        <Label Content="Prihvati [X]" Foreground="White" Width="73" FontSize="12" Margin="0,0,20,0"/>
+                        <Image Source="/Resources/cancelWhite.png" Height="38" Width="48" Margin="0,0,30,0"/>
+                        <Label Content="Otkaži [X]" Foreground="White" Width="73" FontSize="11" Margin="0,0,20,0"/>
 
                     </StackPanel>
                 </Button>

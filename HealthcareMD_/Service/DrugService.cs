@@ -75,7 +75,7 @@ namespace HealthcareMD_.Service
 
         internal ObservableCollection<Drug> SetAllergies(ObservableCollection<Drug> drugs, Patient patient)
         {
-            if (patient.Allergens == null) return drugs;
+            if (patient.Allergens == null) return new ObservableCollection<Drug>(GetValidDrugs());
             ObservableCollection<Drug> drugsUpdated = new ObservableCollection<Drug>();
             
 

@@ -14,10 +14,11 @@ namespace Repository
    public class DoctorRepository
    {
       private ObservableCollection<Doctor> doctors;
+        DoctorFileHandler fileHandler = new DoctorFileHandler();
 
-    public DoctorRepository()
+        public DoctorRepository()
         {
-            DoctorFileHandler fileHandler = new DoctorFileHandler();
+            
             this.doctors = fileHandler.Load();
         }
        

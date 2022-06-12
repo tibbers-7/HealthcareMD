@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Tools;
 
 namespace Model
 {
@@ -18,7 +19,7 @@ namespace Model
         private DateOnly date;
         public DateOnly Date { get { return date; } set { date = value; } }
 
-
+        public string DateString { get { return date.ToString("dd/MM/yyyy"); } set { date = TimeTools.ParseDate(value); } }
 
         internal void FromCSV(GroupCollection csvValues)
         {

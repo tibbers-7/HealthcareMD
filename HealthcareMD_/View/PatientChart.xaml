@@ -90,8 +90,8 @@
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="74,559,237,0" Grid.Column="1">
             <Button  Margin="-1,-1,-1,-1" Foreground="Black" BorderBrush="{x:Null}" Click="OkButton_Click" RenderTransformOrigin="0.142,0.458" Background="{x:Null}">
                 <StackPanel Height="80">
-                    <Image Source="/Resources/acceptWhite.png" Height="46" Width="46"/>
-                    <Label Content="Prihvati [X]" Foreground="White" Width="97" FontSize="12"/>
+                    <Image Source="/Resources/cancelWhite.png" Height="46" Width="46"/>
+                    <Label Content="Otkaži [X]" Foreground="White" Width="97" FontSize="12"/>
                 </StackPanel>
             </Button>
         </Border>
@@ -99,7 +99,7 @@
         <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="12,367,274,197" Grid.Column="1"/>
         <Label Content="Izveštaji" Margin="20,368,262,184" FontSize="20" Grid.Column="1" Foreground="White"/>
 
-        <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding Reports}" Margin="12,408,199,106" Grid.Column="1" Foreground="#FF345F61" >
+        <ListView x:Name="ReportList" GotFocus="ReportGotFocus" HorizontalContentAlignment="Center" ItemsSource="{Binding Reports}" Margin="12,408,199,106" Grid.Column="1" Foreground="#FF345F61" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="Report_DoubleClick" />
@@ -107,17 +107,23 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Datum" Width="80" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Datum" Width="80" DisplayMemberBinding="{Binding DateString}"/>
                     <GridViewColumn Header="Dijagnoza" Width="60" DisplayMemberBinding="{Binding Diagnosis}"/>
 
                 </GridView>
             </ListView.View>
+            <ListView.InputBindings>
+                <KeyBinding
+                                    Modifiers="Control" 
+                                    Key="Space"
+                                    Command="{Binding ShowCommand}"/>
+            </ListView.InputBindings>
         </ListView>
 
         <Border BorderBrush="#FF4C7F82" Background="#FF4C7F82" BorderThickness="3" CornerRadius="8,8,0,0" Margin="210,370,76,184" Grid.Column="1"/>
         <Label Content="Recepti" Margin="215,368,76,184" FontSize="20" Grid.Column="1" Foreground="White"/>
 
-        <ListView HorizontalContentAlignment="Center" ItemsSource="{Binding Prescriptions}"  Margin="211,407,37,107" Grid.Column="1" Foreground="#FF345F61" >
+        <ListView x:Name="PrescList" GotFocus="PrescGotFocus" HorizontalContentAlignment="Center" ItemsSource="{Binding Prescriptions}"  Margin="211,407,37,107" Grid.Column="1" Foreground="#FF345F61" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="Prescription_DoubleClick" />
@@ -125,11 +131,18 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Lek" Width="35" DisplayMemberBinding="{Binding DrugId}"/>
-                    <GridViewColumn Header="Datum" Width="70" DisplayMemberBinding="{Binding Date}"/>
+                    
+                    <GridViewColumn Header="Datum" Width="80" DisplayMemberBinding="{Binding DateString}"/>
+                    <GridViewColumn Header="Lek" Width="25" DisplayMemberBinding="{Binding DrugId}"/>
 
                 </GridView>
             </ListView.View>
+            <ListView.InputBindings>
+                <KeyBinding
+                                    Modifiers="Control" 
+                                    Key="Space"
+                                    Command="{Binding ShowCommand}"/>
+            </ListView.InputBindings>
         </ListView>
         <Border BorderBrush="#FF4C7F82" BorderThickness="3"  Margin="210,408,37,107" Grid.Column="1"/>
         <Border BorderBrush="#FF4C7F82" BorderThickness="3"  Margin="12,407,199,106" Grid.Column="1"/>

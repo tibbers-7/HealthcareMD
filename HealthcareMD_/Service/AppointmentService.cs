@@ -79,7 +79,6 @@ namespace HealthcareMD_.Service
             Patient p = patientService.GetById(patientId);
             if (p == null) return 1;
 
-            if (TimeTools.IsInPast(appt.Date, appt.Time)) return 2;
 
             if (doctorSpec!=null)
             {

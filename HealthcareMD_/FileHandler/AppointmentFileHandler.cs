@@ -15,7 +15,7 @@ namespace FileHandler
     public class AppointmentFileHandler : FileHandlerInterface 
    {
       private static readonly string filePath= "data/appointments.csv";
-        private static readonly string regexString = "(\\d+),(\\d+),(\\d*),(\\d*/\\d*/\\d*),(\\d*:\\d*),(\\d+),(\\d*),(\\d+),(O|A),(Y|N),(A|D|W)";
+        private static readonly string regexString = "(\\d+),(\\d+),(\\d*),(\\d*/\\d*/\\d*),(\\d*:\\d* [P|A]M),(\\d+),(\\d*),(\\d+),(O|A),(Y|N),(A|D|W)";
         //                                              INT id,INT patientId,INT room,DATEONLY date,TIMEONLY time,INT duration,INT doctorId,INT scheduledDoctorId,CHAR type,CHAR emergency,CHAR status
 
         public List<object> Read()

@@ -45,6 +45,32 @@ namespace Tools
             if (dateInQuestion.CompareTo(startDate) < 0 | dateInQuestion.CompareTo(endDate)>0) return false;
             return true;
         }
+
+        public static TimeOnly ParseTime(int hours, int minutes)
+        {
+            string minutesString=minutes.ToString();
+            if (minutesString.Length == 1)
+            {
+                minutesString = "0"+minutesString;
+            }
+
+            string hoursString;
+            if (hours > 12)
+            {
+                int _hours = hours - 12;
+                hoursString = _hours.ToString();
+                minutesString += " PM";
+            }
+            else
+            {
+                hoursString = hours.ToString();
+                minutesString += " AM";
+            }
+            string timeString = hoursString + ":" + minutesString;
+            TimeOnly time;
+            TimeOnly.TryParse(timeString, out time);
+            return time;
+        }
         
     }
 }

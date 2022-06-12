@@ -65,16 +65,20 @@ namespace HealthcareMD_.DoctorWindows
 
         private void Report_DoubleClick(object sender, RoutedEventArgs e)
         {
-            ListViewItem item = sender as ListViewItem;
-            Report report = (Report)item.Content;
-            viewModel.ShowReport(report.Id);
+            viewModel.Show();
         }
 
+        internal void PrescGotFocus(object sender, RoutedEventArgs e)
+        {
+            ReportList.SelectedItem = null;
+        }
+        internal void ReportGotFocus(object sender, RoutedEventArgs e)
+        {
+            PrescList.SelectedItem = null;
+        }
         private void Prescription_DoubleClick(object sender, RoutedEventArgs e)
         {
-            ListViewItem item = sender as ListViewItem;
-            Prescription prescription = (Prescription)item.Content;
-            viewModel.ShowDrug(prescription.DrugId);
+            viewModel.Show();
         }
 
     }

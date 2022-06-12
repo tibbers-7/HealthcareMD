@@ -16,7 +16,7 @@
                 Command="{Binding CloseCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="A"
+                Key="S"
                 Command="{Binding AcceptCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
@@ -84,7 +84,7 @@
             <Button x:Name="Schedule" Margin="-13,-13,-13,-29" Click="ScheduleButton_Click" BorderBrush="{x:Null}" Background="{x:Null}">
                 <StackPanel Height="83" Width="75">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="11"/>
+                    <Label Content="Prihvati [S]" HorizontalContentAlignment="Center" Foreground="White" Height="43" Width="76" FontSize="11"/>
 
                 </StackPanel>
             </Button>

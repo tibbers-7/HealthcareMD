@@ -15,7 +15,7 @@
                 Command="{Binding CloseCommand}"/>
         <KeyBinding 
                 Modifiers="Control" 
-                Key="A"
+                Key="S"
                 Command="{Binding AcceptCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
@@ -53,27 +53,30 @@
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
+
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="138,135,251,27">
-            <Button x:Name="ReportBttn" Margin="-1,-1,-1,-1" Click="GetReport_Click" BorderBrush="{x:Null}" Background="{x:Null}">
-                <StackPanel VerticalAlignment="Center" Height="64" Width="66">
+            <Button x:Name="ReportBttn" Margin="0,-1,0,-1" Click="GetReport_Click" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalAlignment="Center" Width="80">
+                <StackPanel VerticalAlignment="Stretch" Height="64" Width="79" HorizontalAlignment="Center">
                     <Image Source="/Resources/acceptWhite.png" Stretch="Uniform" Height="36" Width="33"/>
-                    <Label Content="Prihvati [A]" Foreground="White" Height="43" Width="76"/>
+                    <Label Content="Prihvati [S]" Foreground="White" Height="29" Width="64" FontSize="11" HorizontalAlignment="Center"/>
 
                 </StackPanel>
             </Button>
 
         </Border>
         <Border BorderBrush="#FF4C7F82" Background="#70ABAF" BorderThickness="3" CornerRadius="8" Margin="235,135,154,27">
-            <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}" Width="80">
-                <StackPanel Height="66" Width="56" Margin="0,0,20,0" >
-                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38"/>
-                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White"/>
+            <Button Click="CancelButton_Click" BorderBrush="{x:Null}" Background="{x:Null}" Margin="-3,0,-3,0">
+                <StackPanel Height="66" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Image Source="/Resources/cancelWhite.png" Stretch="Uniform" Height="37" Width="38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="Otkaži [X]" HorizontalContentAlignment="Center" Foreground="White" Width="64" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/>
                 </StackPanel>
             </Button>
         </Border>
         <Border BorderBrush="#FF4C7F82" Background="#FF70ABAF" BorderThickness="3" CornerRadius="3" Margin="22,10,22,186">
             <Label Content="{Binding PatientName}"  Foreground="White" HorizontalContentAlignment="Center" FontSize="20" />
         </Border>
-
+        <Label Content="__" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.446,0.057" Foreground="#FF284B4E" FontSize="20"/>
+        <Label Content="Od:" Margin="22,77,361,149" Foreground="#FF4C7F82"/>
+        <Label Content="Do:" Margin="318,45,52,181" Foreground="#FF4C7F82"/>
     </Grid>
 </Window>

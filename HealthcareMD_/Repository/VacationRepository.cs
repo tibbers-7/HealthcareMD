@@ -15,9 +15,11 @@ namespace Repository
         private List<Vacation> vacations;
         private List<VacationString> vacationStrings;
         private int errorCode;
+        private DoctorRepository doctorRepository;
 
-        public VacationRepository()
+        public VacationRepository(DoctorRepository doctorRepository)
         {
+            this.doctorRepository = doctorRepository;
             InitVacations();
         }
 
@@ -90,7 +92,6 @@ namespace Repository
             {
                 if (vacation.Status == HealthcareMD_.Status.waiting)
                 {
-                    DoctorRepository doctorRepository = new DoctorRepository();
                     Doctor doctor = doctorRepository.getById(vacation.DoctorId);
                     //startDate.ToString("dd/MM/yyyy") + " - " + endDate.ToString("dd/MM/yyyy");
                     string period = vacation.StartDate.ToString("dd/MM/yyyy") + "-" + vacation.EndDate.ToString("dd/MM/yyyy");

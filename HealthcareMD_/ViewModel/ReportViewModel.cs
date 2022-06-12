@@ -70,6 +70,11 @@ namespace HealthcareMD_.ViewModel
         {
             int operation=callerWindow.operation;
             
+            if (diagnosis==null | anamnesis==null | reportString==null)
+            {
+                MessageBox.Show("Niste uneli sve potrebne podatke!", "Greška");
+                return;
+            }
             int errorCode=0;
             switch (operation)
             {

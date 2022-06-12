@@ -40,6 +40,7 @@
     <None Remove="Resources\referral.png" />
     <None Remove="Resources\referralWhite.png" />
     <None Remove="Resources\rejectDrugWhite.png" />
+    <None Remove="Resources\rejected.png" />
     <None Remove="Resources\report.png" />
     <None Remove="Resources\reported.png" />
     <None Remove="Resources\reportInvalid.png" />
@@ -48,6 +49,7 @@
     <None Remove="Resources\search.png" />
     <None Remove="Resources\searchGreen.png" />
     <None Remove="Resources\searchGrey.png" />
+    <None Remove="Resources\tip.png" />
     <None Remove="Resources\user.png" />
     <None Remove="Resources\vacationWhite.png" />
     <None Remove="Resources\waitGrey.png" />
@@ -92,6 +94,7 @@
     <Resource Include="Resources\referral.png" />
     <Resource Include="Resources\referralWhite.png" />
     <Resource Include="Resources\rejectDrugWhite.png" />
+    <Resource Include="Resources\rejected.png" />
     <Resource Include="Resources\report.png" />
     <Resource Include="Resources\reported.png" />
     <Resource Include="Resources\reportInvalid.png" />
@@ -100,6 +103,7 @@
     <Resource Include="Resources\search.png" />
     <Resource Include="Resources\searchGreen.png" />
     <Resource Include="Resources\searchGrey.png" />
+    <Resource Include="Resources\tip.png" />
     <Resource Include="Resources\user.png" />
     <Resource Include="Resources\vacationWhite.png" />
     <Resource Include="Resources\waitGrey.png" />

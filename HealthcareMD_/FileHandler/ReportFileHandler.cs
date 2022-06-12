@@ -9,7 +9,7 @@ namespace HealthcareMD_.FileHandler
     internal class ReportFileHandler : FileHandlerInterface
     {
         private static readonly string filePath = "data/reports.csv";
-        private static readonly string regexString = "#(\\d+)#(\\d+)#(\\w+)#(\\d+/\\d+/\\d+)#([\\w\\s]+)#([\\w\\s]+)";
+        private static readonly string regexString = "#(\\d+)#(\\d+)#(\\w+)#(\\d+/\\d+/\\d+)#([\\w\\s.,;\"()-]+)#([\\w\\s.,;\"()-]+)";
                                                     //#  id  # jmbg # sifra#  datum         # dijagnoza # anamneza
 
         public List<object> Read()

@@ -101,10 +101,15 @@ namespace HealthcareMD_.ViewModel
             date = appt.Date.ToString("dd/MM/yyyy");
 
 
-            Regex regexObj = new Regex("(\\d+):(\\d{2})");
+            Regex regexObj = new Regex("(\\d+):(\\d{2}) ([A|P])");
             Match matchResult = regexObj.Match(appt.Time.ToString());
+            
             hour = int.Parse(matchResult.Groups[1].Value);
-            minutes = int.Parse(matchResult.Groups[2].Value);
+            if (matchResult.Groups[3].Value.Equals("P"))
+            {
+                hour += 12;
+            }
+                minutes = int.Parse(matchResult.Groups[2].Value);
             emergency = appt.Emergency;
         }
 
@@ -129,7 +134,7 @@ namespace HealthcareMD_.ViewModel
 
         public void AppointmentManagement()
         {
-            if (callerWindow.rooms_cb.SelectedIndex == -1 | callerWindow.duration_tb.Text.Equals("0") | callerWindow.date_tb.Text.Equals("")) MessageBox.Show("Nisu unete svi potrebne informacije.", "Greška");
+            if (callerWindow.rooms_cb.SelectedIndex == -1 | callerWindow.duration_tb.Text.Equals("0") | callerWindow.date_tb.Text.Equals("")) { MessageBox.Show("Nisu unete svi potrebne informacije.", "Greška"); return; } ;
             
             if (id == 0) errorCode=apptController.CreateAppointment(patientId,doctorId, roomId, hour, minutes, duration,date,emergency);
             else errorCode= apptController.UpdateAppointment(id, patientId,doctorId, roomId, hour, minutes, duration,date,emergency);
